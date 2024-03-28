@@ -5,7 +5,6 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -13,27 +12,25 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetTaskApiCall.*;
+import static model.GetTaskApiCall.getEncounterID;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
-
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+public class MedicationCoPayApiCall {
+    private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/v2/add-copay";
+    public static void getMedicationCoPayApiCall(String AUTH_TOKEN, int medicationRequestID, String jsonFile) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            MedicationCoPayApiCall metforminCoPayApiCall = new MedicationCoPayApiCall();
+//            metforminCoPayApiCall.getMedicationPaymentInfo(medicationRequestID);
+            String jsonPayload = gson.toJson(metforminCoPayApiCall.getMedicationPaymentInfo(medicationRequestID, jsonFile));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
-                    .url(apiUrl)
+                    .url(API_URL)
                     .post(body)
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Authorization", "Bearer " + AUTH_TOKEN)
                     .build();
             Response response = client.newCall(request).execute();
-
             if (response.isSuccessful()) {
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
@@ -49,13 +46,13 @@ public class CPClaimTaskApiCall {
     }
 
 
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public MedicationPaymentInfo getMedicationPaymentInfo(int medicationRequestID, String fileName) {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/"+fileName+".json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
+            MedicationPaymentInfo result = gson.fromJson(reader, MedicationPaymentInfo.class);
             result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            result.setMedicationRequestId(medicationRequestID);
+            result.setPrescriptionNumber(getEncounterID());
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -63,5 +60,5 @@ public class CPClaimTaskApiCall {
             return null;
         }
     }
-}
 
+}

@@ -1,0 +1,11 @@
+{"comment": "Test",
+  "copay": 7,
+  "healthPlan": 3,
+  "id": null,
+  "medicationMasterId": 2,
+  "medicationRequestId": null,
+  "prescriptionNumber": "",
+  "quantity": 5,
+  "rejectionReason": "Default Reason",
+  "sigCodes": "dis8w",
+  "sigCodesList": "Test"}

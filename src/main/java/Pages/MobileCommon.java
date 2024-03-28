@@ -38,6 +38,7 @@ public class MobileCommon {
 
     public void waitForAddress() {
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(addressCheckBox));
+        mobileWait.until(ExpectedConditions.elementToBeClickable(addressCheckBox));
     }
     public void  waitForAPIResponseToMirrorInAPP() throws InterruptedException {
         Thread.sleep(7000);

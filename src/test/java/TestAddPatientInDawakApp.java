@@ -3,9 +3,8 @@ import Pages.Pages;
 import model.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.util.List;
 
 public class TestAddPatientInDawakApp extends BaseClass {
     String cpAccessToken;
@@ -63,6 +62,18 @@ public class TestAddPatientInDawakApp extends BaseClass {
         GetTaskApiCall.getTaskApiCall(cpAccessToken,prescriptionOrderID);
         CPClaimTaskApiCall.getTaskClaimApiCall(cpAccessToken);
         SendForInsuranceApiCall.getSendForInsuranceApiCall(cpAccessToken);
+        List<Integer> medicationRequestIDs = InProgressInsuranceTaskDetailsApiCall.makeInProgressInsuranceTaskDetailsApiCall(cpAccessToken);
+        assert medicationRequestIDs != null;
+        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken,medicationRequestIDs.get(1), "MetforminaAddCopay");
+        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(0), "MetforminaAddCopay");
+        ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
     }
-
+    @Test(priority = 8)
+    public void paymentCashOnDelivery() throws InterruptedException {
+        test = extent.createTest("Payment Functionality");
+        Pages.DawakAppLandingPage().openActivePrescription();
+        Pages.DawakAppPrescriptionPage().clickOnProceedBtn();
+        Pages.DawakAppPaymentModule().selectTimeSlotForDelivery();
+        Pages.DawakAppPaymentModule().placeOrderSuccessfully();
+    }
 }

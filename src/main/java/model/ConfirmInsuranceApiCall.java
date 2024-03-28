@@ -5,7 +5,6 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -14,17 +13,18 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetTaskApiCall.*;
+import static model.GetTaskApiCall.getEncounterID;
+import static model.GetTaskApiCall.getTaskId;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+public class ConfirmInsuranceApiCall {
+    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/confirm-insurance";
 
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+    public static void getConfirmInsuranceApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            ConfirmInsuranceApiCall confirmInsuranceApiCall = new ConfirmInsuranceApiCall();
+            String jsonPayload = gson.toJson(confirmInsuranceApiCall.getConfirmInsurance());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -33,7 +33,6 @@ public class CPClaimTaskApiCall {
                     .addHeader("Authorization", "Bearer " + AUTH_TOKEN)
                     .build();
             Response response = client.newCall(request).execute();
-
             if (response.isSuccessful()) {
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
@@ -49,13 +48,13 @@ public class CPClaimTaskApiCall {
     }
 
 
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public ConfirmInsurance getConfirmInsurance() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ConfirmInsurance.json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
+            ConfirmInsurance result = gson.fromJson(reader, ConfirmInsurance.class);
             result.setTaskId(String.valueOf(getTaskId()));
             result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            result.setPrescriptionNumber(prescriptionOrderID);
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -64,4 +63,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-
