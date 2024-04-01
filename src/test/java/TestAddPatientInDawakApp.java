@@ -1,6 +1,6 @@
+import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
-import model.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

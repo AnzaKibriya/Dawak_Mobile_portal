@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.ConfirmInsurance;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -13,8 +14,8 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetCPTaskApiCall.getEncounterID;
-import static model.GetCPTaskApiCall.getTaskId;
+import static API_Calls.GetCPTaskApiCall.getEncounterID;
+import static API_Calls.GetCPTaskApiCall.getTaskId;
 
 public class ConfirmInsuranceApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/confirm-insurance";

@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.PrescriptionRequest;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;

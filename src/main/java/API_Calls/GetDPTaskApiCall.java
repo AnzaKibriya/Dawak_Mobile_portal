@@ -1,4 +1,4 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
 import okhttp3.MediaType;
@@ -10,27 +10,27 @@ import org.json.JSONObject;
 
 import static Helper.BaseClass.client;
 
-public class GetCPTaskApiCall {
-    public static int taskId;
-    public static String encounterID;
+public class GetDPTaskApiCall {
+    public static int taskIdDp;
+    public static String encounterIDDp;
 
-    public static int getTaskId() {
-        return taskId;
+    public static int getTaskIdDp() {
+        return taskIdDp;
     }
 
-    public static void setTaskID(int taskID) {
-        GetCPTaskApiCall.taskId = taskID;
+    public static void setTaskIDDp(int taskIDDp) {
+        GetDPTaskApiCall.taskIdDp = taskIDDp;
     }
 
-    public static String getEncounterID() {
-        return encounterID;
+    public static String getEncounterIDDp() {
+        return encounterIDDp;
     }
 
-    public static void setEncounterID(String encounterID) {
-        GetCPTaskApiCall.encounterID = encounterID;
+    public static void setEncounterIDDp(String encounterIDDp) {
+        GetDPTaskApiCall.encounterIDDp = encounterIDDp;
     }
 
-    static String apiurl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/get-tasks";
+    static String apiurl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/get-todo-tasks";
 
     public static void getTaskApiCall(String authToken, String prescriptionID) {
         try {
@@ -54,8 +54,8 @@ public class GetCPTaskApiCall {
                     JSONObject dataObj = dataArray.getJSONObject(i);
                     String finNumber = dataObj.getString("finNumber");
                     if (finNumber.equals(prescriptionID)) {
-                        setTaskID(dataObj.getInt("taskId"));
-                        setEncounterID(dataObj.getString("encounterId"));
+                        setTaskIDDp(dataObj.getInt("taskId"));
+                        setEncounterIDDp(dataObj.getString("encounterId"));
                         break;
                     }
                 }

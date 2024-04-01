@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.DispensingStarted;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,18 +13,18 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetDPTaskApiCall.*;
+import static API_Calls.GetDPTaskApiCall.getTaskIdDp;
 
-public class ReadyForDeliveryApiCall {
+public class DispensingStartedApiCall {
     static String apiUrl =
-            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/ready-to-pickup-confirmation";
+            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/dispense-inprogress-confirmation";
 
-    public static void getReadyForDeliveryApiCall(String AUTH_TOKEN) {
+    public static void getDispensingStartedApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            ReadyForDeliveryApiCall readyForDeliveryApiCall = new ReadyForDeliveryApiCall();
-            String jsonPayload = gson.toJson(readyForDeliveryApiCall.getReadyForDelivery());
+            DispensingStartedApiCall dispensingStartedApiCall = new DispensingStartedApiCall();
+            String jsonPayload = gson.toJson(dispensingStartedApiCall.getDispensingStarted());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -48,12 +49,11 @@ public class ReadyForDeliveryApiCall {
     }
 
 
-    public ReadyForDelivery getReadyForDelivery() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ReadyForDelivery.json"))) {
+    public DispensingStarted getDispensingStarted() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/DispensingStarted.json"))) {
             Gson gson = new Gson();
-            ReadyForDelivery result = gson.fromJson(reader, ReadyForDelivery.class);
-            result.setTaskId(String.valueOf(getTaskIdDp()));
-            result.setId(Integer.parseInt(getEncounterIDDp()));
+            DispensingStarted result = gson.fromJson(reader, DispensingStarted.class);
+            result.setId(getTaskIdDp());
             result.setEncounterId("19441311");//prescriptionOrderID
             System.out.println(result);
             return result;

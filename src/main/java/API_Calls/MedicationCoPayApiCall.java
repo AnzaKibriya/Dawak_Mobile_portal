@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.MedicationPaymentInfo;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.getEncounterID;
+import static API_Calls.GetCPTaskApiCall.getEncounterID;
 
 public class MedicationCoPayApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/v2/add-copay";

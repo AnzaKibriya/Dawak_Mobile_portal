@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.SendForInsurance;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -13,7 +14,7 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetCPTaskApiCall.getEncounterID;
+import static API_Calls.GetCPTaskApiCall.getEncounterID;
 
 public class SendForInsuranceApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/approve-order";

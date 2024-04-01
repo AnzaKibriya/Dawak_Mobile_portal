@@ -1,6 +1,7 @@
-package model;
+package API_Calls;
 
 import com.google.gson.Gson;
+import model.ReadyForDelivery;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -12,17 +13,18 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.*;
+import static API_Calls.GetDPTaskApiCall.*;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+public class ReadyForDeliveryApiCall {
+    static String apiUrl =
+            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/ready-to-pickup-confirmation";
 
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+    public static void getReadyForDeliveryApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            ReadyForDeliveryApiCall readyForDeliveryApiCall = new ReadyForDeliveryApiCall();
+            String jsonPayload = gson.toJson(readyForDeliveryApiCall.getReadyForDelivery());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -47,13 +49,13 @@ public class CPClaimTaskApiCall {
     }
 
 
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public ReadyForDelivery getReadyForDelivery() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ReadyForDelivery.json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
-            result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            ReadyForDelivery result = gson.fromJson(reader, ReadyForDelivery.class);
+            result.setTaskId(String.valueOf(getTaskIdDp()));
+            result.setId(Integer.parseInt(getEncounterIDDp()));
+            result.setEncounterId("19441311");//prescriptionOrderID
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -62,4 +64,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-

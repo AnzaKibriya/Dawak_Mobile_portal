@@ -1,4 +1,4 @@
-package model;
+package API_Calls;
 
 import okhttp3.Request;
 import okhttp3.Response;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.getEncounterID;
+import static API_Calls.GetCPTaskApiCall.getEncounterID;
 
 public class InProgressInsuranceTaskDetailsApiCall {
     public static List<Integer> makeInProgressInsuranceTaskDetailsApiCall(String AUTH_TOKEN){

@@ -1,7 +1,7 @@
 import Helper.BaseClass;
 import Pages.Pages;
-import model.LoginApiCall;
-import model.PrescriptionApiCall;
+import API_Calls.LoginApiCall;
+import API_Calls.PrescriptionApiCall;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

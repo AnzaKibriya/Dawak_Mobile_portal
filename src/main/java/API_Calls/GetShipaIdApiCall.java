@@ -1,4 +1,4 @@
-package model;
+package API_Calls;
 
 import okhttp3.Request;
 import okhttp3.Response;
