@@ -12,49 +12,44 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.*;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+public class WebPutOTPApiCall {
+    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/verifyOtp";
+    static String accessToken;
 
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+    public static String OTPApiCall(String jsonFile) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            WebPutOTPApiCall putOTPApiCall = new WebPutOTPApiCall();
+            String jsonPayload = gson.toJson(putOTPApiCall.getPutOtp(jsonFile));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
-                    .post(body)
+                    .post(RequestBody.create(jsonPayload, MediaType.parse("application/json")))
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("Authorization", "Bearer " + AUTH_TOKEN)
                     .build();
             Response response = client.newCall(request).execute();
-
             if (response.isSuccessful()) {
                 JSONObject jsonResponse = new JSONObject(response.body().string());
-                System.out.println(jsonResponse);
-
+                JSONObject data = jsonResponse.getJSONObject("data");
+                JSONObject token = data.getJSONObject("token");
+                accessToken = String.valueOf(token.getString("accessToken"));
             } else {
                 System.out.println("API call failed!");
                 System.out.println("Response: " + response.body().string());
             }
-
+            return accessToken;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
-
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
-            Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
-            result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
-            System.out.println(result);
+    public PutOTP getPutOtp(String fileName) {
+        try (Reader reader = new InputStreamReader(this.getClass()
+                .getResourceAsStream("/"+fileName+".json"))) {
+            PutOTP result = new Gson().fromJson(reader, PutOTP.class);
             return result;
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,4 +57,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-

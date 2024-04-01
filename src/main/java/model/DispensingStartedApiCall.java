@@ -12,17 +12,18 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.*;
+import static model.GetDPTaskApiCall.getTaskIdDp;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+public class DispensingStartedApiCall {
+    static String apiUrl =
+            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/dispense-inprogress-confirmation";
 
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+    public static void getDispensingStartedApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            DispensingStartedApiCall dispensingStartedApiCall = new DispensingStartedApiCall();
+            String jsonPayload = gson.toJson(dispensingStartedApiCall.getDispensingStarted());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -47,13 +48,12 @@ public class CPClaimTaskApiCall {
     }
 
 
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public DispensingStarted getDispensingStarted() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/DispensingStarted.json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
-            result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            DispensingStarted result = gson.fromJson(reader, DispensingStarted.class);
+            result.setId(getTaskIdDp());
+            result.setEncounterId("19441311");//prescriptionOrderID
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -62,4 +62,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-

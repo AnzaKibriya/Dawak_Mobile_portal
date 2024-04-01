@@ -12,44 +12,50 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
+import static model.GetDPTaskApiCall.*;
 
-public class CPPutOTPApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/verifyOtp";
-    static String dpAccessToken;
+public class ReadyForDeliveryApiCall {
+    static String apiUrl =
+            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/ready-to-pickup-confirmation";
 
-    public static String OTPApiCall() {
+    public static void getReadyForDeliveryApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPPutOTPApiCall putOTPApiCall = new CPPutOTPApiCall();
-            String jsonPayload = gson.toJson(putOTPApiCall.getPutOtp());
+            ReadyForDeliveryApiCall readyForDeliveryApiCall = new ReadyForDeliveryApiCall();
+            String jsonPayload = gson.toJson(readyForDeliveryApiCall.getReadyForDelivery());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
-                    .post(RequestBody.create(jsonPayload, MediaType.parse("application/json")))
+                    .post(body)
                     .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer " + AUTH_TOKEN)
                     .build();
             Response response = client.newCall(request).execute();
+
             if (response.isSuccessful()) {
                 JSONObject jsonResponse = new JSONObject(response.body().string());
-                JSONObject data = jsonResponse.getJSONObject("data");
-                JSONObject token = data.getJSONObject("token");
-                dpAccessToken = String.valueOf(token.getString("accessToken"));
+                System.out.println(jsonResponse);
+
             } else {
                 System.out.println("API call failed!");
                 System.out.println("Response: " + response.body().string());
             }
-            return dpAccessToken;
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
     }
 
-    public PutOTP getPutOtp() {
-        try (Reader reader = new InputStreamReader(this.getClass()
-                .getResourceAsStream("/CPPutOTP.json"))) {
-            PutOTP result = new Gson().fromJson(reader, PutOTP.class);
+
+    public ReadyForDelivery getReadyForDelivery() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ReadyForDelivery.json"))) {
+            Gson gson = new Gson();
+            ReadyForDelivery result = gson.fromJson(reader, ReadyForDelivery.class);
+            result.setTaskId(String.valueOf(getTaskIdDp()));
+            result.setId(Integer.parseInt(getEncounterIDDp()));
+            result.setEncounterId("19441311");//prescriptionOrderID
+            System.out.println(result);
             return result;
         } catch (IOException e) {
             e.printStackTrace();

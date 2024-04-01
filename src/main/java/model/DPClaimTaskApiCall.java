@@ -6,22 +6,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-
 import static Helper.BaseClass.client;
-import static model.GetCPTaskApiCall.*;
+import static model.GetDPTaskApiCall.getEncounterIDDp;
+import static model.GetDPTaskApiCall.getTaskIdDp;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+public class DPClaimTaskApiCall {
+    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/claim-task";
 
     public static void getTaskClaimApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
+            DPClaimTaskApiCall claimTaskApiCall = new DPClaimTaskApiCall();
             String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
@@ -47,13 +46,12 @@ public class CPClaimTaskApiCall {
     }
 
 
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public DPClaimTask getClaimTask() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/DPClaimTask.json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
-            result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            DPClaimTask result = gson.fromJson(reader, DPClaimTask.class);
+            result.setTaskId(getTaskIdDp());
+            result.setId(Integer.parseInt(getEncounterIDDp()));
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -62,4 +60,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-

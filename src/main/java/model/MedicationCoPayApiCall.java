@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
-import static model.GetTaskApiCall.getEncounterID;
+import static model.GetCPTaskApiCall.getEncounterID;
 
 public class MedicationCoPayApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/v2/add-copay";

@@ -13,8 +13,7 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetTaskApiCall.getEncounterID;
-import static model.GetTaskApiCall.getTaskId;
+import static model.GetCPTaskApiCall.getEncounterID;
 
 public class SendForInsuranceApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/approve-order";

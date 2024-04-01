@@ -3,11 +3,12 @@ import Pages.Pages;
 import model.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.io.FileNotFoundException;
 import java.util.List;
 
 public class TestAddPatientInDawakApp extends BaseClass {
-    String cpAccessToken;
+    String cpAccessToken, dpAccessToken;
     @BeforeClass
     public void createANewPrescription() {
         accessToken = LoginApiCall.makeLoginApiCall();
@@ -36,7 +37,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 4)
-    public void verifyPatientDetails() throws FileNotFoundException {
+    public void verifyPatientDetails() throws  FileNotFoundException {
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
@@ -55,11 +56,11 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 7)
-    public void webPart() {
-        LoginCpApiCall.makeCpLoginApiCall();
-        CPCreateOtpApiCall.createOtpApiCall();
-        cpAccessToken = CPPutOTPApiCall.OTPApiCall();
-        GetTaskApiCall.getTaskApiCall(cpAccessToken,prescriptionOrderID);
+    public void webCentralPharma() {
+        WebLoginApiCall.makeWebLoginApiCall("LoginCP");
+        WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
+        cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
+        GetCPTaskApiCall.getTaskApiCall(cpAccessToken,prescriptionOrderID);
         CPClaimTaskApiCall.getTaskClaimApiCall(cpAccessToken);
         SendForInsuranceApiCall.getSendForInsuranceApiCall(cpAccessToken);
         List<Integer> medicationRequestIDs = InProgressInsuranceTaskDetailsApiCall.makeInProgressInsuranceTaskDetailsApiCall(cpAccessToken);
@@ -75,5 +76,16 @@ public class TestAddPatientInDawakApp extends BaseClass {
         Pages.DawakAppPrescriptionPage().clickOnProceedBtn();
         Pages.DawakAppPaymentModule().selectTimeSlotForDelivery();
         Pages.DawakAppPaymentModule().placeOrderSuccessfully();
+    }
+
+    @Test(priority = 9)
+   public void webDispensingPortal(){
+        WebLoginApiCall.makeWebLoginApiCall("LoginDP");
+        WebCreateOtpApiCall.createOtpApiCall("DPCreateOTP");
+        dpAccessToken = WebPutOTPApiCall.OTPApiCall("DPPutOTP");
+        GetDPTaskApiCall.getTaskApiCall(dpAccessToken, "19441311");
+        DPClaimTaskApiCall.getTaskClaimApiCall(dpAccessToken);
+        DispensingStartedApiCall.getDispensingStartedApiCall(dpAccessToken);
+        ReadyForDeliveryApiCall.getReadyForDeliveryApiCall(dpAccessToken);
     }
 }

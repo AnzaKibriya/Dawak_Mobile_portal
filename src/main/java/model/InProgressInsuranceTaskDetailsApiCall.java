@@ -1,8 +1,5 @@
 package model;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
@@ -12,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Helper.BaseClass.client;
-import static model.GetTaskApiCall.getEncounterID;
+import static model.GetCPTaskApiCall.getEncounterID;
 
 public class InProgressInsuranceTaskDetailsApiCall {
     public static List<Integer> makeInProgressInsuranceTaskDetailsApiCall(String AUTH_TOKEN){

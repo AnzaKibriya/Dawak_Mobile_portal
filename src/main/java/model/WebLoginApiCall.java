@@ -13,14 +13,14 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 
-public class LoginCpApiCall {
+public class WebLoginApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/v2/web-login";
-    public static void makeCpLoginApiCall() {
+    public static void makeWebLoginApiCall(String jsonFile) {
         try{
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            LoginCpApiCall loginCpApiCall = new LoginCpApiCall();
-            String jsonPayload = gson.toJson(loginCpApiCall.getLoginCp());
+            WebLoginApiCall loginCpApiCall = new WebLoginApiCall();
+            String jsonPayload = gson.toJson(loginCpApiCall.getWebLogin(jsonFile));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -39,9 +39,9 @@ public class LoginCpApiCall {
             e.printStackTrace();
         }
     }
-    public LoginWeb getLoginCp() {
+    public LoginWeb getWebLogin(String fileName) {
         try (Reader reader = new InputStreamReader(this.getClass()
-                .getResourceAsStream("/LoginCP.json"))) {
+                .getResourceAsStream("/"+fileName+".json"))) {
             LoginWeb result = new Gson().fromJson(reader, LoginWeb.class);
             return result;
         } catch (IOException e) {

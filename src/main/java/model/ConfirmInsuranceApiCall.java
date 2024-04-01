@@ -13,8 +13,8 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.prescriptionOrderID;
-import static model.GetTaskApiCall.getEncounterID;
-import static model.GetTaskApiCall.getTaskId;
+import static model.GetCPTaskApiCall.getEncounterID;
+import static model.GetCPTaskApiCall.getTaskId;
 
 public class ConfirmInsuranceApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/confirm-insurance";

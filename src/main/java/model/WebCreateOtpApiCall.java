@@ -13,14 +13,14 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 
-public class CPCreateOtpApiCall {
+public class WebCreateOtpApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/createOtp";
-    public static void createOtpApiCall() {
+    public static void createOtpApiCall(String jsonFile) {
         try{
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPCreateOtpApiCall createOtpApiCall = new CPCreateOtpApiCall();
-            String jsonPayload = gson.toJson(createOtpApiCall.getCreateOtp());
+            WebCreateOtpApiCall createOtpApiCall = new WebCreateOtpApiCall();
+            String jsonPayload = gson.toJson(createOtpApiCall.getCreateOtp(jsonFile));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
@@ -41,9 +41,9 @@ public class CPCreateOtpApiCall {
             e.printStackTrace();
         }
     }
-    public CreateOtp getCreateOtp() {
+    public CreateOtp getCreateOtp(String fileName) {
         try (Reader reader = new InputStreamReader(this.getClass()
-                .getResourceAsStream("/CPCreateOTP.json"))) {
+                .getResourceAsStream("/"+fileName+".json"))) {
             CreateOtp result = new Gson().fromJson(reader, CreateOtp.class);
             return result;
         } catch (IOException e) {
