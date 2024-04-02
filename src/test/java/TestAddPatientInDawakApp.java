@@ -9,11 +9,13 @@ import java.util.List;
 
 public class TestAddPatientInDawakApp extends BaseClass {
     String cpAccessToken, dpAccessToken;
+
     @BeforeClass
     public void createANewPrescription() {
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
+//        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
         NewPatientApiCall.makeCreatePatientApiCall(accessToken, prescriptionOrderID);
     }
 
@@ -37,7 +39,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 4)
-    public void verifyPatientDetails() throws  FileNotFoundException {
+    public void verifyPatientDetails() throws FileNotFoundException {
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
@@ -60,15 +62,16 @@ public class TestAddPatientInDawakApp extends BaseClass {
         WebLoginApiCall.makeWebLoginApiCall("LoginCP");
         WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
         cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
-        GetCPTaskApiCall.getTaskApiCall(cpAccessToken,prescriptionOrderID);
+        GetCPTaskApiCall.getTaskApiCall(cpAccessToken, prescriptionOrderID);
         CPClaimTaskApiCall.getTaskClaimApiCall(cpAccessToken);
         SendForInsuranceApiCall.getSendForInsuranceApiCall(cpAccessToken);
         List<Integer> medicationRequestIDs = InProgressInsuranceTaskDetailsApiCall.makeInProgressInsuranceTaskDetailsApiCall(cpAccessToken);
         assert medicationRequestIDs != null;
-        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken,medicationRequestIDs.get(1), "MetforminaAddCopay");
+        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(1), "MetforminaAddCopay");
         MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(0), "MetforminaAddCopay");
         ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
     }
+
     @Test(priority = 8)
     public void paymentCashOnDelivery() throws InterruptedException {
         test = extent.createTest("Payment Functionality");
@@ -79,7 +82,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 9)
-   public void webDispensingPortal(){
+    public void webDispensingPortal() {
         WebLoginApiCall.makeWebLoginApiCall("LoginDP");
         WebCreateOtpApiCall.createOtpApiCall("DPCreateOTP");
         dpAccessToken = WebPutOTPApiCall.OTPApiCall("DPPutOTP");
@@ -90,6 +93,11 @@ public class TestAddPatientInDawakApp extends BaseClass {
         String shipaOrderNum = GetShipaIdApiCall.makeShipaIdApiCall(dpAccessToken);
         ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "initiated");
         ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "Completed");
+    }
 
+    @Test(priority = 10)
+    public void removePatientFromApp() {
+        Pages.DawakAppLandingPage().navigateToPatientPage();
+        Pages.DawakAppPatientModule().deletePatient();
     }
 }

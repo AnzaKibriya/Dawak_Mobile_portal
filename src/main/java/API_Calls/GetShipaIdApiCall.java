@@ -5,16 +5,17 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static API_Calls.GetDPTaskApiCall.getEncounterIDDp;
 import static Helper.BaseClass.client;
 
 public class GetShipaIdApiCall {
+
     static String shipaOrderNum;
-    static String deliveryID;
 
 
     public static String makeShipaIdApiCall(String AUTH_TOKEN) {
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/shipa/get-delivery-details?encounterId=" + getDeliveryID();
+            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/shipa/get-delivery-details?encounterId=" + getEncounterIDDp();
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()
@@ -39,13 +40,4 @@ public class GetShipaIdApiCall {
             return null;
         }
     }
-
-    public static void setDeliveryID(String deliveryID) {
-        GetShipaIdApiCall.deliveryID = deliveryID;
-    }
-
-    public static String getDeliveryID() {
-        return deliveryID;
-    }
-
 }

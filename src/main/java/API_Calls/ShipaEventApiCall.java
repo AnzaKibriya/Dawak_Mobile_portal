@@ -23,6 +23,7 @@ public class ShipaEventApiCall {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
             ShipaEventApiCall shipaInitiateEventApiCall = new ShipaEventApiCall();
+            shipaInitiateEventApiCall.shipaEventRequest(orderID, event);
             String jsonPayload = gson.toJson(shipaInitiateEventApiCall.shipaEventRequest(orderID, event));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
@@ -42,21 +43,13 @@ public class ShipaEventApiCall {
             else {
                 System.out.println("API call failed!");
             }
-
-//            if (response.isSuccessful()) {
-//                System.out.println("API call successful!");
-//                System.out.println("Response: " + response.body().string());
-//            } else {
-//                System.out.println("API call failed!");
-//                System.out.println("Response: " + response.body().string());
-//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public ShipaEvent shipaEventRequest(String orderID, String event) {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ShipaInitiateEvent.json"))) {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/ShipaEvent.json"))) {
             Gson gson = new Gson();
             ShipaEvent result = gson.fromJson(reader, ShipaEvent.class);
             result.setShipaRef(orderID);
