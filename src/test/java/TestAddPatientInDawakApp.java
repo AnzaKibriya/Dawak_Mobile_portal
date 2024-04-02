@@ -83,9 +83,13 @@ public class TestAddPatientInDawakApp extends BaseClass {
         WebLoginApiCall.makeWebLoginApiCall("LoginDP");
         WebCreateOtpApiCall.createOtpApiCall("DPCreateOTP");
         dpAccessToken = WebPutOTPApiCall.OTPApiCall("DPPutOTP");
-        GetDPTaskApiCall.getTaskApiCall(dpAccessToken, "19441311");
+        GetDPTaskApiCall.getTaskApiCall(dpAccessToken, prescriptionOrderID);
         DPClaimTaskApiCall.getTaskClaimApiCall(dpAccessToken);
         DispensingStartedApiCall.getDispensingStartedApiCall(dpAccessToken);
         ReadyForDeliveryApiCall.getReadyForDeliveryApiCall(dpAccessToken);
+        String shipaOrderNum = GetShipaIdApiCall.makeShipaIdApiCall(dpAccessToken);
+        ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "initiated");
+        ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "Completed");
+
     }
 }

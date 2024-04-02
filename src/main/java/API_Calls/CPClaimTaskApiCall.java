@@ -14,6 +14,7 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static API_Calls.GetCPTaskApiCall.*;
+import static Helper.BaseClass.prescriptionOrderID;
 
 public class CPClaimTaskApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
@@ -54,7 +55,7 @@ public class CPClaimTaskApiCall {
             ClaimTask result = gson.fromJson(reader, ClaimTask.class);
             result.setTaskId(String.valueOf(getTaskId()));
             result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId("18853671");
+            result.setEncounterId(prescriptionOrderID);//prescriptionOrderID
             System.out.println(result);
             return result;
         } catch (IOException e) {

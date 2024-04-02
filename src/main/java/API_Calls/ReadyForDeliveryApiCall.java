@@ -14,6 +14,7 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static API_Calls.GetDPTaskApiCall.*;
+import static Helper.BaseClass.prescriptionOrderID;
 
 public class ReadyForDeliveryApiCall {
     static String apiUrl =
@@ -55,7 +56,7 @@ public class ReadyForDeliveryApiCall {
             ReadyForDelivery result = gson.fromJson(reader, ReadyForDelivery.class);
             result.setTaskId(String.valueOf(getTaskIdDp()));
             result.setId(Integer.parseInt(getEncounterIDDp()));
-            result.setEncounterId("19441311");//prescriptionOrderID
+            result.setEncounterId(prescriptionOrderID);//prescriptionOrderID
             System.out.println(result);
             return result;
         } catch (IOException e) {

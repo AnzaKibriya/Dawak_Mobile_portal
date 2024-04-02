@@ -42,12 +42,22 @@ public class BaseClass {
     public static String prescriptionOrderID;
     public static String accessToken;
     public static OkHttpClient client;
-    public static String loginWindow;
-    public static String otpText;
     public static SoftAssert softAssert;
     public static AndroidDriver androidDriver;
     public static String emiratesID;
     public static String formattedDate;
+    static FileInputStream fis ;
+
+    public static String propertyFile(String PropFileName, String stringName) {
+        try {
+            fis = new FileInputStream("./src/main/resources/" + PropFileName + ".properties");
+            prop.load(fis);
+            storestring = prop.getProperty(stringName);
+        } catch (Exception e) {
+            System.out.println("File Not Found :" + e.getMessage());
+        }
+        return storestring;
+    }
 
     @BeforeSuite
     public void setUp() throws MalformedURLException {
@@ -62,16 +72,7 @@ public class BaseClass {
         extent.attachReporter(extentSparkReporter);
     }
 
-    public static String propertyFile(String PropFileName, String stringName) {
-        try {
-            FileInputStream fis = new FileInputStream("./src/main/resources/" + PropFileName + ".properties");
-            prop.load(fis);
-            storestring = prop.getProperty(stringName);
-        } catch (Exception e) {
-            System.out.println("File Not Found :" + e.getMessage());
-        }
-        return storestring;
-    }
+
 
     public static String screenshot(String filename) throws IOException {
         File obj = ((TakesScreenshot) androidDriver).getScreenshotAs(OutputType.FILE);
