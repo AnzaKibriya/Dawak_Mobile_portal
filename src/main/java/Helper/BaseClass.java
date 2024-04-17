@@ -108,6 +108,8 @@ public class BaseClass {
         for (int i = 0; i < length; i++) {
             int digit = random.nextInt(10);
             prescriptionOrderID = String.valueOf(numericString.append(digit));
+            test.log(Status.PASS, " prescription id created successfully");
+
         }
         return prescriptionOrderID;
     }

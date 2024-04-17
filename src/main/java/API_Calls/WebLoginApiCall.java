@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.LoginWeb;
 import okhttp3.MediaType;
@@ -13,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
 public class WebLoginApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/v2/web-login";
@@ -30,6 +32,7 @@ public class WebLoginApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, " Login API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
             } else {
                 System.out.println("API call failed!");

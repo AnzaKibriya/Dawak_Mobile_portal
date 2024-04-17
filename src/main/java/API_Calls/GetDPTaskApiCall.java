@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -9,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
 public class GetDPTaskApiCall {
     public static int taskIdDp;
@@ -46,6 +48,7 @@ public class GetDPTaskApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Get Task API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
                 JSONArray dataArray = jsonResponse.getJSONArray("data");

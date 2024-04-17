@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.CreateOtp;
 import okhttp3.MediaType;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
+import static Helper.BaseClass.*;
 
 public class WebCreateOtpApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/createOtp";
@@ -29,10 +30,13 @@ public class WebCreateOtpApiCall {
                     .addHeader("Content-Type", "application/json")
                     .build();
             Response response = client.newCall(request).execute();
+
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Otp created successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
 //                JSONObject data = jsonResponse.getJSONObject("data");
 //                accessToken = data.getString("access_token");
+
             } else {
                 System.out.println("API call failed!");
                 System.out.println("Response: " + response.body().string());

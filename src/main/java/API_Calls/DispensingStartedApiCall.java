@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.DispensingStarted;
 import okhttp3.MediaType;
@@ -12,9 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
 import static API_Calls.GetDPTaskApiCall.getTaskIdDp;
-import static Helper.BaseClass.prescriptionOrderID;
+import static Helper.BaseClass.*;
 
 public class DispensingStartedApiCall {
     static String apiUrl =
@@ -36,6 +36,7 @@ public class DispensingStartedApiCall {
             Response response = client.newCall(request).execute();
 
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Dispensing Started API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
 

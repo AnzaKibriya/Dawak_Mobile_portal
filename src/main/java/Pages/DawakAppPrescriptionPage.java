@@ -1,13 +1,13 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import static Helper.BaseClass.mobileWait;
-import static Helper.BaseClass.prescriptionOrderID;
+import static Helper.BaseClass.*;
 
 public class DawakAppPrescriptionPage {
     AndroidDriver androidDriver;
@@ -31,6 +31,8 @@ public class DawakAppPrescriptionPage {
         String number = mobileWait.until(ExpectedConditions.visibilityOfElementLocated(prescriptionNumber)).getText();
         String[] arrOfStr = number.split("#");
         Assert.assertEquals(arrOfStr[1].replaceAll("\\s", ""), prescriptionOrderID);
+        test.log(Status.PASS, "prescription id verified successfuly");
+
     }
 
     public void deliverMedicine() {
@@ -38,16 +40,22 @@ public class DawakAppPrescriptionPage {
         Pages.MobileCommon().waitForAddress();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmLocationBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToHomeBtn)).click();
+        test.log(Status.PASS, "medicine delivered successfully");
+
     }
 
     public void clickOnProceedBtn() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "successfully clicked on proceed button");
+
     }
 
     public void clickOnGoToPharmacy() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToPharmacyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "successfully clicked on Go to pharmacy button");
+
     }
 
     public void cancelPrescription() {
@@ -56,5 +64,7 @@ public class DawakAppPrescriptionPage {
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(closeBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "prescription cancelled successfully");
+
     }
 }

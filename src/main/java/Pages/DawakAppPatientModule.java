@@ -1,5 +1,6 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -41,6 +42,8 @@ public class DawakAppPatientModule {
     public void clickOnAddFamilyBtn() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(addFamilyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "clicked on Add family button");
+
     }
 
     public void addNewPatient() {
@@ -50,12 +53,16 @@ public class DawakAppPatientModule {
         mobileWait.until(ExpectedConditions.elementToBeClickable(emiratesIdField)).sendKeys(emiratesID);
         mobileWait.until(ExpectedConditions.elementToBeClickable(registerBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "New patient addedd successfully");
+
     }
     public void verifyOTP(){
         mobileWait.until(ExpectedConditions.elementToBeClickable(otpFields)).sendKeys("1234");
         mobileWait.until(ExpectedConditions.elementToBeClickable(verifyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "Otp verified successfully");
+
     }
 
     public void verifyPatientDetailsAndProceed() throws FileNotFoundException {
@@ -71,12 +78,16 @@ public class DawakAppPatientModule {
         softAssert.assertEquals(patient.getAsJsonObject("maritalStatus").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
         softAssert.assertEquals(patient.getAsJsonObject("language").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id("ae.purehealth.dawak.qa:id/description_2_tv")).getText());
         mobileWait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
+        test.log(Status.PASS, "patient details verified and clicked on proceed button");
+
     }
 
     public void navigateBackToDashboard(){
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(successLabel)).getText();
         Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(successLabel)).getText(), "Patient Added Successfully!");
         mobileWait.until(ExpectedConditions.elementToBeClickable(dashboardNavigateBtn)).click();
+        test.log(Status.PASS, "Navigated back to dashboard");
+
     }
 
     public void deletePatient(){
@@ -85,5 +96,7 @@ public class DawakAppPatientModule {
 //        Pages.MobileCommon().waitForLoaderInvisibility();
         WebElement a = androidDriver.findElement(By.id(patientRemoveMessage));
         Assert.assertEquals(androidDriver.findElement(By.id(patientRemoveMessage)).getText(), "Patient removed successfully" );
+        test.log(Status.PASS, "patient removed successfully");
+
     }
 }

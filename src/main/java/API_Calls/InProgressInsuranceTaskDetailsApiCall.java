@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static Helper.BaseClass.client;
 import static API_Calls.GetCPTaskApiCall.getEncounterID;
+import static Helper.BaseClass.test;
 
 public class InProgressInsuranceTaskDetailsApiCall {
     public static List<Integer> makeInProgressInsuranceTaskDetailsApiCall(String AUTH_TOKEN){
@@ -24,6 +26,7 @@ public class InProgressInsuranceTaskDetailsApiCall {
             Response response = client.newCall(request).execute();
             List<Integer> medicationRequestIds = null;
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Medication Request Id API called successfully");
                 medicationRequestIds = new ArrayList<>();
                 // Return the list of medicationRequestIDs
                 JSONObject jsonObject = new JSONObject(response.body().string());

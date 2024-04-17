@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.SendForInsurance;
 import okhttp3.MediaType;
@@ -12,9 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
-import static Helper.BaseClass.prescriptionOrderID;
 import static API_Calls.GetCPTaskApiCall.getEncounterID;
+import static Helper.BaseClass.*;
 
 public class SendForInsuranceApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/approve-order";
@@ -34,6 +34,7 @@ public class SendForInsuranceApiCall {
             Response response = client.newCall(request).execute();
 
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "send Insurance for Approval API called successfully ");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
 

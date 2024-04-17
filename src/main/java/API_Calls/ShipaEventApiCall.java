@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.ShipaEvent;
 import okhttp3.MediaType;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
 public class ShipaEventApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/shipa/webhook";
@@ -37,6 +39,7 @@ public class ShipaEventApiCall {
             assert response.body() != null;
             String responseString = response.body().string();
             if (responseString.contains("Notification")){
+                test.log(Status.PASS, "makeShipaEventApi Called successfully");
                 System.out.println("API call successful!");
                 System.out.println("Response: " + response.body().string());
             }

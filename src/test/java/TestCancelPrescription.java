@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 public class TestCancelPrescription extends BaseClass {
     @BeforeClass
     public void createANewPrescription(){
+        test = extent.createTest("create prescription and Addingpatient API call");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);

@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.PrescriptionRequest;
 import okhttp3.MediaType;
@@ -14,8 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static Helper.BaseClass.client;
-import static Helper.BaseClass.emiratesID;
+import static Helper.BaseClass.*;
 
 public class NewPatientApiCall {
 
@@ -37,6 +37,7 @@ public class NewPatientApiCall {
             Response response = client.newCall(request).execute();
             int  a = response.code();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "create patient API called successfully");
                 System.out.println("API call successful!");
                 System.out.println("Response: " + response.body().string());
             } else {

@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 public class TestPrescriptionDelivery extends BaseClass {
    @BeforeClass
     public void createANewPrescription(){
-        accessToken = LoginApiCall.makeLoginApiCall();
+       test = extent.createTest("create prescription and Addingpatient API call");
+       accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
         PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
@@ -26,7 +27,6 @@ public class TestPrescriptionDelivery extends BaseClass {
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
-
     @Test(priority = 3)
     public void sendPrescriptionForDelivery() {
         test = extent.createTest("Deliver Medicine Functionality");

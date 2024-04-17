@@ -1,5 +1,6 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Helper.BaseClass.mobileWait;
+import static Helper.BaseClass.test;
 
 public class DawakAppPaymentModule {
     AndroidDriver androidDriver;
@@ -30,6 +32,8 @@ public class DawakAppPaymentModule {
         mobileWait.until(ExpectedConditions.elementToBeClickable(timeSlotCheckBox)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmTimeSlotBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, " successfully selected Time slot for Delivery");
+
     }
 
     public void placeOrderSuccessfully() throws InterruptedException {
@@ -40,5 +44,7 @@ public class DawakAppPaymentModule {
         Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(goToHomeAfterPayment));
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToHomeAfterPayment)).click();
+        test.log(Status.PASS, "order placed successfully");
+
     }
 }

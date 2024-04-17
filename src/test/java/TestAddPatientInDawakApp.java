@@ -12,6 +12,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
+        test = extent.createTest("create prescription and Addingpatient API call");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
@@ -59,6 +60,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
 
     @Test(priority = 7)
     public void webCentralPharma() {
+        test = extent.createTest("verify central pharmacist APIs");
         WebLoginApiCall.makeWebLoginApiCall("LoginCP");
         WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
         cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
@@ -83,6 +85,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
 
     @Test(priority = 9)
     public void webDispensingPortal() {
+        test = extent.createTest("verify Dispensing portal APIs");
         WebLoginApiCall.makeWebLoginApiCall("LoginDP");
         WebCreateOtpApiCall.createOtpApiCall("DPCreateOTP");
         dpAccessToken = WebPutOTPApiCall.OTPApiCall("DPPutOTP");

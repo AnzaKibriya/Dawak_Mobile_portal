@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.PutOTP;
 import okhttp3.MediaType;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
+import static Helper.BaseClass.*;
 
 public class WebPutOTPApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/verifyOtp";
@@ -32,6 +33,7 @@ public class WebPutOTPApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Put Otp API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 JSONObject data = jsonResponse.getJSONObject("data");
                 JSONObject token = data.getJSONObject("token");
