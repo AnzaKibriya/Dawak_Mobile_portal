@@ -28,7 +28,7 @@ public class TestPrescriptionDelivery extends BaseClass {
     }
 
     @Test(priority = 3)
-    public void sendPrescriptionForDelivery() {
+    public void sendPrescriptionForDelivery() throws InterruptedException {
         test = extent.createTest("Deliver Medicine Functionality");
         Pages.DawakAppPrescriptionPage().deliverMedicine();
     }

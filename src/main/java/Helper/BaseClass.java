@@ -63,11 +63,11 @@ public class BaseClass {
     public void setUp() throws MalformedURLException {
         client = new OkHttpClient();
        androidDriver = new AndroidDriver(new URL("http://localhost:4723"), getAPKOptions());
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         softAssert = new SoftAssert();
         extent = new ExtentReports();
         prop = new Properties();
-        mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(45));
+        mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(20));
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak.html");
         extent.attachReporter(extentSparkReporter);
     }

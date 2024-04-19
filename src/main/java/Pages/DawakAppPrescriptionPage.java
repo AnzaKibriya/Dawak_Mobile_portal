@@ -33,9 +33,10 @@ public class DawakAppPrescriptionPage {
         Assert.assertEquals(arrOfStr[1].replaceAll("\\s", ""), prescriptionOrderID);
     }
 
-    public void deliverMedicine() {
+    public void deliverMedicine() throws InterruptedException {
         mobileWait.until(ExpectedConditions.elementToBeClickable(deliverMedicationBtn)).click();
         Pages.MobileCommon().waitForAddress();
+        Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmLocationBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToHomeBtn)).click();
     }

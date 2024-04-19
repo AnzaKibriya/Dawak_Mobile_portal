@@ -52,7 +52,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 6)
-    public void sendPrescriptionForDelivery() {
+    public void sendPrescriptionForDelivery() throws InterruptedException {
         test = extent.createTest("Deliver Medicine Functionality");
         Pages.DawakAppPrescriptionPage().deliverMedicine();
     }
@@ -96,7 +96,7 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 10)
-    public void removePatientFromApp() {
+    public void removePatientFromApp() throws InterruptedException {
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
     }
