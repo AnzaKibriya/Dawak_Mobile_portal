@@ -21,6 +21,7 @@ public class DawakAppPrescriptionPage {
     By cancelPrescriptionReason = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/reject_reasons_rv\"]/android.view.ViewGroup[2]");
     By submitBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/button3");
     By closeBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/cancel_action");
+    By cancelOrderBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/hollow_button");
 
     public DawakAppPrescriptionPage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -51,11 +52,15 @@ public class DawakAppPrescriptionPage {
         Pages.MobileCommon().waitForLoaderInvisibility();
     }
 
-    public void cancelPrescription() {
+    public void setCancelPrescriptionReason() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelPrescriptionReason)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(submitBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(closeBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+    }
+
+    public void cancelOrder(){
+        mobileWait.until(ExpectedConditions.elementToBeClickable(cancelOrderBtn)).click();
     }
 }

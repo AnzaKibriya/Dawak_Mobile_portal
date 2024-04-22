@@ -79,11 +79,9 @@ public class DawakAppPatientModule {
         mobileWait.until(ExpectedConditions.elementToBeClickable(dashboardNavigateBtn)).click();
     }
 
-    public void deletePatient() throws InterruptedException {
+    public void deletePatient() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(deletePatientBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmDeleteBtn)).click();
-        Pages.MobileCommon().waitForElementsInteractions();
-        mobileWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(patientRemoveMessage)));
-        Assert.assertEquals(androidDriver.findElement(By.id(patientRemoveMessage)).getText(), "Patient removed successfully" );
+        Assert.assertEquals(androidDriver.findElement(By.xpath(patientRemoveMessage)).getText(), "Patient removed successfully" );
     }
 }

@@ -21,6 +21,8 @@ public class MobileCommon {
     AndroidDriver androidDriver;
     By dawakAppLoader = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/success_logo_v\")");
     By addressCheckBox = AppiumBy.className("android.view.ViewGroup");
+    By homeBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/home_btn");
+    By navigateBackBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/imageView7");
     static public JsonObject patient;
     static public JsonObject order;
 
@@ -40,7 +42,8 @@ public class MobileCommon {
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(addressCheckBox));
         mobileWait.until(ExpectedConditions.elementToBeClickable(addressCheckBox));
     }
-    public void  waitForAPIResponseToMirrorInAPP() throws InterruptedException {
+
+    public void waitForAPIResponseToMirrorInAPP() throws InterruptedException {
         Thread.sleep(7000);
     }
 
@@ -48,7 +51,7 @@ public class MobileCommon {
         Thread.sleep(5000);
     }
 
-    public void scrollInMobile(WebElement webElement, String direction, String percentage){
+    public void scrollInMobile(WebElement webElement, String direction, String percentage) {
         HashMap<String, String> scrollObject = new HashMap<String, String>();
         scrollObject.put("direction", direction);
         scrollObject.put("element", ((RemoteWebElement) webElement).getId());
@@ -65,8 +68,14 @@ public class MobileCommon {
         // Extract patient information
         patient = jsonObject.getAsJsonObject("patient");
         order = jsonObject.getAsJsonObject("order");
+    }
 
+    public void navigateToHomePage(){
+        mobileWait.until(ExpectedConditions.elementToBeClickable(homeBtn)).click();
+    }
 
+    public void navigateBack(){
+        mobileWait.until(ExpectedConditions.elementToBeClickable(navigateBackBtn)).click();
     }
 
 }

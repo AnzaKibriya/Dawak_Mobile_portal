@@ -7,8 +7,9 @@ import org.testng.annotations.Test;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class TestAddPatientInDawakApp extends BaseClass {
-    String cpAccessToken, dpAccessToken;
+
+public class TestCancelOrderAfterInsuranceApproval extends BaseClass {
+    String cpAccessToken;
 
     @BeforeClass
     public void createANewPrescription() {
@@ -73,30 +74,23 @@ public class TestAddPatientInDawakApp extends BaseClass {
     }
 
     @Test(priority = 8)
-    public void paymentCashOnDelivery() throws InterruptedException {
+    public void cancelPrescription() throws InterruptedException {
         test = extent.createTest("Payment Functionality");
         Pages.DawakAppLandingPage().openActivePrescription();
-        Pages.DawakAppPrescriptionPage().clickOnProceedBtn();
-        Pages.DawakAppPaymentModule().selectTimeSlotForDelivery();
-        Pages.DawakAppPaymentModule().placeOrderSuccessfully();
+        Pages.DawakAppPrescriptionPage().cancelOrder();
+        Pages.DawakAppPrescriptionPage().setCancelPrescriptionReason();
     }
 
     @Test(priority = 9)
-    public void webDispensingPortal() {
-        WebLoginApiCall.makeWebLoginApiCall("LoginDP");
-        WebCreateOtpApiCall.createOtpApiCall("DPCreateOTP");
-        dpAccessToken = WebPutOTPApiCall.OTPApiCall("DPPutOTP");
-        GetDPTaskApiCall.getTaskApiCall(dpAccessToken, prescriptionOrderID);
-        DPClaimTaskApiCall.getTaskClaimApiCall(dpAccessToken);
-        DispensingStartedApiCall.getDispensingStartedApiCall(dpAccessToken);
-        ReadyForDeliveryApiCall.getReadyForDeliveryApiCall(dpAccessToken);
-        String shipaOrderNum = GetShipaIdApiCall.makeShipaIdApiCall(dpAccessToken);
-        ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "initiated");
-        ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "Completed");
+    public void verifyPrescriptionCancelled() throws InterruptedException {
+        Pages.DawakAppLandingPage().openCancelPrescription();
+        Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
+
     }
 
     @Test(priority = 10)
     public void removePatientFromApp() {
+        Pages.MobileCommon().navigateBack();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
     }
