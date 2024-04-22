@@ -68,7 +68,7 @@ public class BaseClass {
         extent = new ExtentReports();
         prop = new Properties();
         mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(20));
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak.html");
+        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak_Mobile_Portal.html");
         extent.attachReporter(extentSparkReporter);
     }
 

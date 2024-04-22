@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class TestAddPatientInDawakApp extends BaseClass {
+public class TestDeliverMedicine extends BaseClass {
     String cpAccessToken, dpAccessToken;
 
     @BeforeClass

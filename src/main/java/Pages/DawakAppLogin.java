@@ -30,7 +30,7 @@ public class DawakAppLogin {
 
     public void loginToDawakApp() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(userName)).sendKeys("855509929");//502201010
-        mobileWait.until(ExpectedConditions.elementToBeClickable(password)).sendKeys("Pass_123");//Akhil@2929
+        mobileWait.until(ExpectedConditions.elementToBeClickable(password)).sendKeys("Pass_1234");//Akhil@2929
         mobileWait.until(ExpectedConditions.elementToBeClickable(signInBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
     }
