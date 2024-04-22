@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.ConfirmInsurance;
 import okhttp3.MediaType;
@@ -12,10 +13,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
-import static Helper.BaseClass.prescriptionOrderID;
 import static API_Calls.GetCPTaskApiCall.getEncounterID;
 import static API_Calls.GetCPTaskApiCall.getTaskId;
+import static Helper.BaseClass.*;
 
 public class ConfirmInsuranceApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/confirm-insurance";
@@ -35,6 +35,7 @@ public class ConfirmInsuranceApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Get conformation API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
 

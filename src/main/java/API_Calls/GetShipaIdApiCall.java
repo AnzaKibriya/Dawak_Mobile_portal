@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
@@ -7,6 +8,7 @@ import org.json.JSONObject;
 
 import static API_Calls.GetDPTaskApiCall.getEncounterIDDp;
 import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
 public class GetShipaIdApiCall {
 
@@ -24,6 +26,7 @@ public class GetShipaIdApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Shipa API Call Successful");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 JSONArray dataArray = jsonResponse.getJSONArray("data");
                 JSONObject dataObject = dataArray.getJSONObject(0);

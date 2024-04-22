@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.PrescriptionRequest;
 import okhttp3.MediaType;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
 public class PrescriptionApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/prescription/new";
@@ -34,6 +36,7 @@ public class PrescriptionApiCall {
             Response response = client.newCall(request).execute();
             int  a = response.code();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Make prescription API called successfully");
                 System.out.println("API call successful!");
                 System.out.println("Response: " + response.body().string());
             } else {
