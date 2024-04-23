@@ -96,7 +96,6 @@ public class DawakAppPatientModule {
         Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(patientRemoveMessage)));
         Assert.assertEquals(androidDriver.findElement(By.id(patientRemoveMessage)).getText(), "Patient removed successfully" );
-        test.log(Status.PASS, "patient removed successfully");
-
+        test.log(Status.PASS, "successfully patient removed");
     }
 }
