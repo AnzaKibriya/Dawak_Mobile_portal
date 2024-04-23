@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.ClaimTask;
 import okhttp3.MediaType;
@@ -12,9 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.client;
 import static API_Calls.GetCPTaskApiCall.*;
-import static Helper.BaseClass.prescriptionOrderID;
+import static Helper.BaseClass.*;
 
 public class CPClaimTaskApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
@@ -35,6 +35,7 @@ public class CPClaimTaskApiCall {
             Response response = client.newCall(request).execute();
 
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Get task API claim called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
 

@@ -1,5 +1,6 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -76,6 +77,8 @@ public class MobileCommon {
 
     public void navigateBack(){
         mobileWait.until(ExpectedConditions.elementToBeClickable(navigateBackBtn)).click();
+        test.log(Status.PASS, "Navigated  Back successfully");
+
     }
 
 }
