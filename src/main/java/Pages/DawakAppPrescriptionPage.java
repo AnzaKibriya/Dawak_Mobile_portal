@@ -1,13 +1,13 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import static Helper.BaseClass.mobileWait;
-import static Helper.BaseClass.prescriptionOrderID;
+import static Helper.BaseClass.*;
 
 public class DawakAppPrescriptionPage {
     AndroidDriver androidDriver;
@@ -32,6 +32,8 @@ public class DawakAppPrescriptionPage {
         String number = mobileWait.until(ExpectedConditions.visibilityOfElementLocated(prescriptionNumber)).getText();
         String[] arrOfStr = number.split("#");
         Assert.assertEquals(arrOfStr[1].replaceAll("\\s", ""), prescriptionOrderID);
+        test.log(Status.PASS, "prescription id verified successfully");
+
     }
 
     public void deliverMedicine() throws InterruptedException {
@@ -40,6 +42,8 @@ public class DawakAppPrescriptionPage {
         Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmLocationBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToHomeBtn)).click();
+        test.log(Status.PASS, "Medicine Delivered successfully");
+
     }
 
     public void clickOnProceedBtn() {
@@ -50,6 +54,8 @@ public class DawakAppPrescriptionPage {
     public void clickOnGoToPharmacy() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToPharmacyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "click on Goto pharmacy button");
+
     }
 
     public void setCancelPrescriptionReason() {
@@ -58,9 +64,12 @@ public class DawakAppPrescriptionPage {
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(closeBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+
     }
 
     public void cancelOrder(){
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelOrderBtn)).click();
+        test.log(Status.PASS, "order cancelled successfully");
+
     }
 }

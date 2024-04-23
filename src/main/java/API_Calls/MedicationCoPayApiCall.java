@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.MedicationPaymentInfo;
 import okhttp3.MediaType;
@@ -14,6 +15,7 @@ import java.io.Reader;
 
 import static Helper.BaseClass.client;
 import static API_Calls.GetCPTaskApiCall.getEncounterID;
+import static Helper.BaseClass.test;
 
 public class MedicationCoPayApiCall {
     private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/v2/add-copay";
@@ -33,6 +35,7 @@ public class MedicationCoPayApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "Get Medicine API called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
 

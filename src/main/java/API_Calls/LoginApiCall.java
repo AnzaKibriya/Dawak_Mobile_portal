@@ -1,5 +1,6 @@
 package API_Calls;
 
+import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.Login;
 import okhttp3.MediaType;
@@ -12,8 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static Helper.BaseClass.accessToken;
-import static Helper.BaseClass.client;
+import static Helper.BaseClass.*;
 
 public class LoginApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/purenet/login";
@@ -31,6 +31,8 @@ public class LoginApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
+                test.log(Status.PASS, "purenet API called successfully");
+
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 JSONObject data = jsonResponse.getJSONObject("data");
                 accessToken = data.getString("access_token");

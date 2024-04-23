@@ -1,11 +1,13 @@
 package Pages;
 
+import com.aventstack.extentreports.Status;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Helper.BaseClass.mobileWait;
+import static Helper.BaseClass.test;
 
 public class DawakAppLandingPage {
     AndroidDriver androidDriver;
@@ -22,10 +24,14 @@ public class DawakAppLandingPage {
         mobileWait.until(ExpectedConditions.elementToBeClickable(activePrescriptionWidget)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Pages.MobileCommon().waitForElementsInteractions();
+        test.log(Status.PASS, "Active prescription opened successfully");
+
     }
     public void navigateToPatientPage() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "Navigated to patient page");
+
     }
 
     public void openCancelPrescription() throws InterruptedException {
@@ -33,5 +39,7 @@ public class DawakAppLandingPage {
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelPrescriptionWidget)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Pages.MobileCommon().waitForElementsInteractions();
+        test.log(Status.PASS, "open cancel prescription successfully");
+
     }
 }
