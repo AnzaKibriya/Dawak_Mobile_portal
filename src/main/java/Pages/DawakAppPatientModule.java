@@ -32,7 +32,7 @@ public class DawakAppPatientModule {
     By dashboardNavigateBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/dashbord_navigator_btn");
     By deletePatientBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/delete_v");
     By confirmDeleteBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/confirm_button");
-    String patientRemoveMessage = "//android.widget.Toast[@text=\"Patient removed successfully\"]";
+    String patientRemoveMessage = "//android.widget.Toast[@text='Patient removed successfully']";
 
 
     public DawakAppPatientModule(AndroidDriver AndroidDriver) {
