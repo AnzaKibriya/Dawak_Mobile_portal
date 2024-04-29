@@ -13,6 +13,7 @@ public class TestCancelOrderAfterInsuranceApproval extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
+        test = extent.createTest("Login to Dawak1 App");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);

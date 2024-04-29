@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import static Helper.BaseClass.*;
+import static Helper.BaseClass.test;
 
 public class LoginApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/purenet/login";
