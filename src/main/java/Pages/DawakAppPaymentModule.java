@@ -17,6 +17,14 @@ public class DawakAppPaymentModule {
     By placeOrderBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/place_order_btn");
     String dateSlotScroll = "ae.purehealth.dawak.qa:id/rvDatesSlots";
     String pageScroll = "ae.purehealth.dawak.qa:id/root_view";
+    By paymentByCardBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/mode_of_payment_card_v");
+    By cardHolderName = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_cardholder_name");
+    By cardNumber = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_card_number");
+    By cardExpire = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_expiration");
+    By cardCvv= AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_cvv");
+    By payNowBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/pt2_pay_button_id");
+
+
 
     public DawakAppPaymentModule(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -40,5 +48,19 @@ public class DawakAppPaymentModule {
         Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.visibilityOfElementLocated(goToHomeAfterPayment));
         mobileWait.until(ExpectedConditions.elementToBeClickable(goToHomeAfterPayment)).click();
+    }
+
+    public void paymentByCard() throws InterruptedException {
+        mobileWait.until(ExpectedConditions.elementToBeClickable(paymentByCardBtn)).click();
+        WebElement scrollPage = androidDriver.findElement(By.id(String.format(pageScroll)));
+        Pages.MobileCommon().scrollInMobile(scrollPage, "down", "80");
+        Pages.MobileCommon().waitForElementsInteractions();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(placeOrderBtn)).click();
+        Pages.MobileCommon().waitForLoaderInvisibility();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(cardHolderName)).sendKeys("Test Card");
+        mobileWait.until(ExpectedConditions.elementToBeClickable(cardNumber)).sendKeys("4000000000000002");
+        mobileWait.until(ExpectedConditions.elementToBeClickable(cardExpire)).sendKeys("1225");
+        mobileWait.until(ExpectedConditions.elementToBeClickable(cardCvv)).sendKeys("123");
+        mobileWait.until(ExpectedConditions.elementToBeClickable(payNowBtn)).click();
     }
 }

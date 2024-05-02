@@ -32,8 +32,6 @@ public class LoginApiCall {
                     .build();
             Response response = client.newCall(request).execute();
             if (response.isSuccessful()) {
-                test.log(Status.PASS, "purenet API called successfully");
-
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 JSONObject data = jsonResponse.getJSONObject("data");
                 accessToken = data.getString("access_token");

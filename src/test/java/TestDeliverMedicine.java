@@ -12,6 +12,7 @@ public class TestDeliverMedicine extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
+        test = extent.createTest("Login to Dawak App");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);

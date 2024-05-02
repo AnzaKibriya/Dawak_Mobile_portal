@@ -24,12 +24,13 @@ public class TestPrescriptionDelivery extends BaseClass {
     public void verifyPrescription() throws InterruptedException {
         test = extent.createTest("Open Prescription and Verify ID");
         Pages.DawakAppLandingPage().openActivePrescription();
-//        Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
 
     @Test(priority = 3)
     public void sendPrescriptionForDelivery() throws InterruptedException {
         test = extent.createTest("Deliver Medicine Functionality");
-        Pages.DawakAppPrescriptionPage().deliverMedicine();
+        Pages.DawakAppPrescriptionPage().clickOnProceedBtn();
+        Pages.DawakAppPaymentModule().selectTimeSlotForDelivery();
+        Pages.DawakAppPaymentModule().paymentByCard();
     }
 }

@@ -7,5 +7,5 @@
   "prescriptionNumber": "",
   "quantity": 5,
   "rejectionReason": "Default Reason",
-  "sigCodes": "dis8w",
-  "sigCodesList": "Test"}
+  "sigCodes": "0.13X: one eighth,",
+  "sigCodesList": "0.13x,"}
