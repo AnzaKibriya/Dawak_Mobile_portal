@@ -1,4 +1,5 @@
-{"comment": "Test",
+{
+  "comment": "Test",
   "copay": 7,
   "healthPlan": 3,
   "id": null,
@@ -8,4 +9,5 @@
   "quantity": 5,
   "rejectionReason": "Default Reason",
   "sigCodes": "0.13X: one eighth,",
-  "sigCodesList": "0.13x,"}
+  "sigCodesList": "0.13x,"
+}

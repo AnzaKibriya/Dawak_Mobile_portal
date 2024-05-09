@@ -11,14 +11,3 @@
   "sigCodes": "DIS8W: Dissolve 1 tablet in 8mL water & drink as instructed.,",
   "sigCodesList": "DIS8W,"
 }
-comment :"test"
-copay: 8
-healthPlan: 3
-id: 17066
-medicationMasterId: 2
-medicationRequestId: 21326
-prescriptionNumber: "17066"
-quantity: 6
-rejectionReason: ""
-sigCodes: "DIS8W: Dissolve 1 tablet in 8mL water & drink as instructed.,"
-sigCodesList:"DIS8W,"

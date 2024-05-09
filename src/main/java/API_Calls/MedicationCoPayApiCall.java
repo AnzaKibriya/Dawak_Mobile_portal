@@ -24,7 +24,6 @@ public class MedicationCoPayApiCall {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
             MedicationCoPayApiCall metforminCoPayApiCall = new MedicationCoPayApiCall();
-//            metforminCoPayApiCall.getMedicationPaymentInfo(medicationRequestID);
             String jsonPayload = gson.toJson(metforminCoPayApiCall.getMedicationPaymentInfo(medicationRequestID, jsonFile));
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()

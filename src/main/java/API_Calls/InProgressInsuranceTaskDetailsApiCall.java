@@ -16,7 +16,7 @@ import static Helper.BaseClass.test;
 public class InProgressInsuranceTaskDetailsApiCall {
     public static List<Integer> makeInProgressInsuranceTaskDetailsApiCall(String AUTH_TOKEN){
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/patient-refill/v2/get-task-detail/"+ getEncounterID();
+            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/patient-refill/v3/get-task-detail/"+ getEncounterID();
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

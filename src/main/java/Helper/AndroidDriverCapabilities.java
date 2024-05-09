@@ -10,14 +10,15 @@ public class AndroidDriverCapabilities {
         String apkPath = Path.of(System.getProperty("user.dir"), "/src/main/resources/app-qa-debug.apk").toString();
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android")
-                .setAvd("Pixel_6_API_34")
+                .setAvd("Pixel_6_API_33")
                 .setAutomationName("UiAutomator2")
-                .setDeviceName("Pixel 6 API 34")
+                .setDeviceName("Pixel 6 API 33")
                 .setAppPackage("ae.purehealth.dawak.qa")
                 .setAppActivity("ae.purehealth.dawak.ui.splash.SplashActivity")
                 .setApp(apkPath)
                 .autoGrantPermissions()
-                .setNewCommandTimeout(Duration.ofMinutes(25))
+                .setAutoGrantPermissions(true)
+                .setNewCommandTimeout(Duration.ofMinutes(35))
                 .setNoReset(false);
         options.setCapability("appium:settings[ignoreUnimportantViews]", true);
         return options;

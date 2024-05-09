@@ -62,6 +62,7 @@ public class DawakAppPrescriptionPage {
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelPrescriptionReason)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(submitBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
+        Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(closeBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
 

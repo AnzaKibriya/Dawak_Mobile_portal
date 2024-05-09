@@ -7,11 +7,13 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.google.common.io.Files;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import okhttp3.OkHttpClient;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -62,12 +64,13 @@ public class BaseClass {
     @BeforeSuite
     public void setUp() throws MalformedURLException {
         client = new OkHttpClient();
-       androidDriver = new AndroidDriver(new URL("http://localhost:4723"), getAPKOptions());
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        androidDriver = new AndroidDriver(new URL("http://localhost:4723"), getAPKOptions());
+        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(07));
+        androidDriver.setFileDetector(new LocalFileDetector());
         softAssert = new SoftAssert();
         extent = new ExtentReports();
         prop = new Properties();
-        mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(20));
+        mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(12));
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak_Mobile_Portal.html");
         extent.attachReporter(extentSparkReporter);
     }
