@@ -25,6 +25,8 @@ public class DawakAppLandingPage {
     By cancelPrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(3)");
     By uploadPrescriptionBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadPrescription_tv");
     By uploadPrescriptionLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadPrescription_iv");
+    By insuranceCardFrontLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadFront_iv");
+    By insuranceCardBackLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadBack_iv");
     By selectBtnNative = AppiumBy.id("com.google.android.documentsui:id/action_menu_select");
     By pdfAttached = AppiumBy.id("ae.purehealth.dawak.qa:id/pdf_viewer");
     By patientNameField = AppiumBy.id("ae.purehealth.dawak.qa:id/patient_tv");
@@ -74,6 +76,8 @@ public class DawakAppLandingPage {
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(insuranceNameRadioBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(insuranceListConfirmBtn)).click();
+        String pdfPath = Path.of(System.getProperty("user.dir"), "/src/main/resources/dummy.pdf").toString();
+        androidDriver.pushFile("/sdcard/download/test.pdf", new File(pdfPath));
         mobileWait.until(ExpectedConditions.elementToBeClickable(uploadPrescriptionLink)).click();
         Set<String> contextNames = ((SupportsContextSwitching)androidDriver).getContextHandles();
         for (String strContextName : contextNames) {
@@ -82,8 +86,6 @@ public class DawakAppLandingPage {
                 break;
             }
         }
-        String pdfPath = Path.of(System.getProperty("user.dir"), "/src/main/resources/dummy.pdf").toString();
-        androidDriver.pushFile("/sdcard/download/test.pdf", new File(pdfPath));
 
         //Click on files
         By eleFile = By.xpath("//*[@text='File']");
@@ -93,10 +95,24 @@ public class DawakAppLandingPage {
         //select pdf file from downloads (location of pdf file)
         By eleDoc = By.id("com.google.android.documentsui:id/item_root");
         androidDriver.findElement(eleDoc).click();
-        androidDriver.findElement(selectBtnNative).click();
-        WebElement scrollPage = androidDriver.findElement(By.id(String.format(pageScroll)));
-        Pages.MobileCommon().scrollInMobile(scrollPage, "down", "100");
-        Pages.MobileCommon().waitForElementsInteractions();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(insuranceCardFrontLink)).click();
+        Set<String> contextNamesCardFront = ((SupportsContextSwitching)androidDriver).getContextHandles();
+        for (String strContextName : contextNamesCardFront) {
+            if (strContextName.contains("NATIVE_APP")) {
+                androidDriver.context("NATIVE_APP");
+                break;
+            }
+        }
+        androidDriver.findElement(eleFile).click();
+
+        //select pdf file from downloads (location of pdf file)
+
+        androidDriver.findElement(eleDoc).click();
+
+//        androidDriver.findElement(selectBtnNative).click();
+//        WebElement scrollPage = androidDriver.findElement(By.id(String.format(pageScroll)));
+//        Pages.MobileCommon().scrollInMobile(scrollPage, "down", "100");
+//        Pages.MobileCommon().waitForElementsInteractions();
         mobileWait.until(ExpectedConditions.elementToBeClickable(uploadBtn)).click();
         WebElement verifySuccessMessage = androidDriver.findElement(By.id(String.format(successMessage)));
         Assert.assertEquals(verifySuccessMessage.getText().contains("Uploaded Successfully"), "Uploaded Successfully");
