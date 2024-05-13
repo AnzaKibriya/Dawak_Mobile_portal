@@ -13,7 +13,7 @@ public class TestCancelOrderAfterInsuranceApproval extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Create New Prescription for a New Patient");
+        test = extent.createTest("Testing Cancel Order After Insurance Approval");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);

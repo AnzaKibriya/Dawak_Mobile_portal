@@ -20,6 +20,7 @@ public class LoginApiCall {
     static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/purenet/login";
     public static String makeLoginApiCall() {
         try{
+            test.log(Status.INFO,"Create New Prescription for a New Patient");
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
             LoginApiCall loginApiCall = new LoginApiCall();

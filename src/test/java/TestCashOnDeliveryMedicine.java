@@ -12,7 +12,7 @@ public class TestCashOnDeliveryMedicine extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Create New Prescription for a New Patient");
+        test = extent.createTest("Testing Cash On Delivery Medicine Scenario");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
