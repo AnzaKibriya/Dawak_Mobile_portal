@@ -42,4 +42,11 @@ public class Pages {
         return pg;
     }
 
+
+    public static DawakAddressAddition DawakAddressAddition() {
+        DawakAddressAddition pg = new DawakAddressAddition((AndroidDriver) BaseClass.androidDriver);
+        PageFactory.initElements(BaseClass.androidDriver, pg);
+        return pg;
+    }
+
 }
