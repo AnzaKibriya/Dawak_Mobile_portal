@@ -10,6 +10,7 @@ public class PrescriptionRequest {
     @SerializedName("order")
     private Order order;
 
+
     // Constructors, getters, and setters
 
     public Patient getPatient() {
@@ -27,4 +28,5 @@ public class PrescriptionRequest {
     public void setOrder(Order order) {
         this.order = order;
     }
+
 }

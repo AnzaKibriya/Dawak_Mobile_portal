@@ -49,6 +49,17 @@ public class Patient {
     @SerializedName("address")
     private Address address;
 
+    public Address getPharmacist() {
+        return pharmacist;
+    }
+
+    public void setPharmacist(Address pharmacist) {
+        this.pharmacist = pharmacist;
+    }
+
+    @SerializedName("pharmacist")
+    private Address pharmacist;
+
 
     public String getMiddleName() {
         return middleName;

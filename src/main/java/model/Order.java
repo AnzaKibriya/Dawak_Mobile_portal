@@ -25,6 +25,10 @@ public class Order {
 
     @SerializedName("medications")
     private List<Medication> medications;
+
+    @SerializedName("pharmacyEncounterId")
+    private String pharmacyEncounterId;
+
     public String getParentFin() {
         return parentFin;
     }
@@ -41,6 +45,9 @@ public class Order {
         this.physicianEncounterId = physicianEncounterId;
     }
 
+    public void sePharmacyEncounterId(String pharmacyEncounterId) {
+        this.pharmacyEncounterId = pharmacyEncounterId;
+    }
     public String getPhysicianOrderDate() {
         return physicianOrderDate;
     }

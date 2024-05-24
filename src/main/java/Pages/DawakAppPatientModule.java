@@ -56,7 +56,7 @@ public class DawakAppPatientModule {
         test.log(Status.PASS, "New patient added successfully");
 
     }
-    public void verifyOTP(){
+    public void verifyOTP() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(otpFields)).sendKeys("1234");
         mobileWait.until(ExpectedConditions.elementToBeClickable(verifyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
