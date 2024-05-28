@@ -49,4 +49,10 @@ public class Pages {
         return pg;
     }
 
+    public static DawakPatientDetailsPage DawakPatientDetailsPage(){
+        DawakPatientDetailsPage pg = new DawakPatientDetailsPage((AndroidDriver) BaseClass.androidDriver);
+        PageFactory.initElements(BaseClass.androidDriver, pg);
+        return pg;
+    }
+
 }

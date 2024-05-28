@@ -50,6 +50,9 @@ public class DawakAddressAddition {
 
     By savedAddress=AppiumBy.id("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/rvAddress\"]/android.widget.FrameLayout/android.view.ViewGroup");
 
+    public DawakAddressAddition() {
+
+    }
 
 
     public void addAddress() throws AWTException, InterruptedException {
