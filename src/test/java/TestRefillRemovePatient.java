@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 public class TestRefillRemovePatient extends BaseClass {
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Testing Cancel Prescription");
+        test = extent.createTest("Refill-Testing Remove Patient from the Patient Details Screen");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
