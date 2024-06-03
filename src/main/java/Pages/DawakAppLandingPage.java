@@ -38,10 +38,16 @@ public class DawakAppLandingPage {
     String successMessage = "ae.purehealth.dawak.qa:id/congrats_label_tv";
     String exitAction ="ae.purehealth.dawak.qa:id/touch_outside";
     String pageScroll = "ae.purehealth.dawak.qa:id/root_view";
+    By manageFamilyText = AppiumBy.id("ae.purehealth.dawak.qa:id/textView7");
+    By completePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(2)");
+    By totalPatientsWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(0)");
+    DawakAddressAddition dp = new DawakAddressAddition();
+
 
     public DawakAppLandingPage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
     }
+
 
 
     public void openActivePrescription() throws InterruptedException {
@@ -49,14 +55,20 @@ public class DawakAppLandingPage {
         mobileWait.until(ExpectedConditions.elementToBeClickable(activePrescriptionWidget)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Pages.MobileCommon().waitForElementsInteractions();
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Active Prescriptions");
         test.log(Status.PASS, "Active prescription opened successfully");
 
+    }
+    public void totalPatientswidget() {
+        mobileWait.until(ExpectedConditions.elementToBeClickable(totalPatientsWidget)).click();
+        Pages.MobileCommon().waitForLoaderInvisibility();
+        test.log(Status.PASS, "Successfully navigated to the total patients widget");
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Manage Family");
     }
     public void navigateToPatientPage() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         test.log(Status.PASS, "Navigated to patient page");
-
     }
 
     public void openCancelPrescription() throws InterruptedException {
@@ -64,7 +76,16 @@ public class DawakAppLandingPage {
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelPrescriptionWidget)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Pages.MobileCommon().waitForElementsInteractions();
-        test.log(Status.PASS, "open cancel prescription successfully");
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Cancelled Prescriptions");
+        test.log(Status.PASS, "Successfully navigated to the  cancelled prescription widget");
+    }
+    public void openCompletedPrescription() throws InterruptedException {
+        Pages.MobileCommon().waitForAPIResponseToMirrorInAPP();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(completePrescriptionWidget)).click();
+        Pages.MobileCommon().waitForLoaderInvisibility();
+        Pages.MobileCommon().waitForElementsInteractions();
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Completed Prescriptions");
+        test.log(Status.PASS, "Successfully navigated to the completed prescription widget");
     }
 
     public void openUploadPrescriptionPage() throws IOException, InterruptedException {
@@ -131,5 +152,9 @@ public class DawakAppLandingPage {
         WebElement verifySuccessMessage = androidDriver.findElement(By.id(String.format(successMessage)));
         Assert.assertEquals(verifySuccessMessage.getText().contains("Uploaded Successfully"), true);
         androidDriver.findElement(By.id(String.valueOf(exitAction))).click();
+    }
+    public void backtoDashboardArrowButton(){
+        mobileWait.until(ExpectedConditions.elementToBeClickable(dp.mamnageAddressBackButton)).click();
+        test.log(Status.PASS, "Successfully navigated back to dashboard landing page");
     }
 }

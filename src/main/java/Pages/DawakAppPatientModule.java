@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.IExpectedExceptionsHolder;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class DawakAppPatientModule {
     By deletePatientBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/delete_v");
     By confirmDeleteBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/confirm_button");
     String patientRemoveMessage = "//android.widget.Toast[@text=\"Patient removed successfully\"]";
-
+    By manageFamilyText = AppiumBy.id("ae.purehealth.dawak.qa:id/textView7");
 
     public DawakAppPatientModule(AndroidDriver AndroidDriver) {
         androidDriver = AndroidDriver;
@@ -42,7 +43,7 @@ public class DawakAppPatientModule {
     public void clickOnAddFamilyBtn() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(addFamilyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
-        test.log(Status.PASS, "click on add family button");
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Manage Family");
 
     }
 
@@ -90,11 +91,11 @@ public class DawakAppPatientModule {
 
     }
 
-    public void deletePatient() {
-        mobileWait.until(ExpectedConditions.elementToBeClickable(deletePatientBtn)).click();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(confirmDeleteBtn)).click();
-        Assert.assertEquals(androidDriver.findElement(By.xpath(patientRemoveMessage)).getText(), "Patient removed successfully" );
-        test.log(Status.PASS, "patient deleted successfully");
+        public void deletePatient() {
+            mobileWait.until(ExpectedConditions.elementToBeClickable(deletePatientBtn)).click();
+            mobileWait.until(ExpectedConditions.elementToBeClickable(confirmDeleteBtn)).click();
+            Assert.assertEquals(androidDriver.findElement(By.xpath(patientRemoveMessage)).getText(), "Patient removed successfully" );
+            test.log(Status.PASS, "patient deleted successfully");
 
     }
 }
