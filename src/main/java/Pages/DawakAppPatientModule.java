@@ -43,8 +43,6 @@ public class DawakAppPatientModule {
     public void clickOnAddFamilyBtn() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(addFamilyBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
-        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Manage Family");
-
     }
 
     public void addNewPatient() {

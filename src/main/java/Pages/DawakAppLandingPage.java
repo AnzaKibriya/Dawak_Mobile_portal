@@ -41,6 +41,8 @@ public class DawakAppLandingPage {
     By manageFamilyText = AppiumBy.id("ae.purehealth.dawak.qa:id/textView7");
     By completePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(2)");
     By totalPatientsWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(0)");
+    By talkToPhamaicstButton = AppiumBy.id("ae.purehealth.dawak.qa:id/secondary_button");
+    By phoneNumberFromDial = AppiumBy.id("com.google.android.dialer:id/digits");
     DawakAddressAddition dp = new DawakAddressAddition();
 
 
@@ -156,5 +158,11 @@ public class DawakAppLandingPage {
     public void backtoDashboardArrowButton(){
         mobileWait.until(ExpectedConditions.elementToBeClickable(dp.mamnageAddressBackButton)).click();
         test.log(Status.PASS, "Successfully navigated back to dashboard landing page");
+    }
+    public void talkToPharmaicst(){
+        androidDriver.findElement(By.id("ae.purehealth.dawak.qa:id/secondary_button")).click();
+        String expectedPharmacistNumber = "028150450";
+        Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberFromDial)).getText(), expectedPharmacistNumber);
+        test.log(Status.PASS, "Successfully navigated back to dashboard landing page"+expectedPharmacistNumber);
     }
 }
