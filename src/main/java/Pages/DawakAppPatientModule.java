@@ -49,7 +49,7 @@ public class DawakAppPatientModule {
         mobileWait.until(ExpectedConditions.elementToBeClickable(relationDropdown)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(relationOtherCheckBox)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(confirmRelationBtn)).click();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(emiratesIdField)).sendKeys(emiratesID);
+        mobileWait.until(ExpectedConditions.elementToBeClickable(emiratesIdField)).sendKeys("784"+ emiratesID);
         mobileWait.until(ExpectedConditions.elementToBeClickable(registerBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         test.log(Status.PASS, "New patient added successfully");
