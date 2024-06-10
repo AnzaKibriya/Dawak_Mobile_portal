@@ -1,6 +1,4 @@
-import API_Calls.LoginApiCall;
-import API_Calls.NewPatientApiCall;
-import API_Calls.RefillsApiCall;
+import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
 import org.testng.annotations.BeforeClass;
@@ -9,14 +7,16 @@ import org.testng.annotations.Test;
 import java.io.FileNotFoundException;
 
 public class TestRefillCancel extends BaseClass {
+    String mobileUserAccessToken;
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Testing Cancel Prescription");
+        test = extent.createTest("Refill - Testing Cancel Prescription");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
          RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
+
     }
 
     @Test(priority = 1)
@@ -26,7 +26,7 @@ public class TestRefillCancel extends BaseClass {
         Pages.AndroidAppLogin().loginToDawakApp();
     }
 
-    @Test(priority = 2)
+   @Test(priority = 2)
     public void navigateToPatientPage() {
         test = extent.createTest("Navigation to Add Family Form");
         Pages.DawakAppLandingPage().navigateToPatientPage();
@@ -37,7 +37,8 @@ public class TestRefillCancel extends BaseClass {
     public void addPatientToDawakApp() {
         test = extent.createTest("Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
-        Pages.DawakAppPatientModule().verifyOTP();
+       Pages.DawakAppPatientModule().verifyOTP();
+
     }
 
     @Test(priority = 4)
