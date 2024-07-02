@@ -1,5 +1,6 @@
 package Helper;
 
+import Pages.Pages;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -14,6 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -73,6 +75,9 @@ public class BaseClass {
         mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(12));
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak_Mobile_Portal.html");
         extent.attachReporter(extentSparkReporter);
+        Pages.AndroidAppLogin().handleSplashScreens();
+        Pages.AndroidAppLogin().loginToDawakApp();
+
     }
 
 
@@ -127,4 +132,6 @@ public class BaseClass {
         extent.flush();
         androidDriver.quit();
     }
+
+
 }
