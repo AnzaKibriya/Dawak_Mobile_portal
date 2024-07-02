@@ -1,76 +1,70 @@
-import API_Calls.LoginApiCall;
-import API_Calls.NewPatientApiCall;
-import API_Calls.RefillsApiCall;
+import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
-import com.aventstack.extentreports.Status;
-import io.appium.java_client.android.AndroidDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import static Helper.AndroidDriverCapabilities.getAPKOptions;
 
 public class TestRefillCancel extends BaseClass {
+    String mobileUserAccessToken;
     @BeforeClass
-    public void createANewPrescription() throws MalformedURLException {
-        test = extent.createTest("Testing Refill Cancel Prescription");
+    public void createANewPrescription() {
+        test = extent.createTest("Refill - Testing Cancel Prescription");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
-         RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
+        RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
+
     }
 
-//    @Test(priority = 1)
-//    public void loginApp() {
-//        test = extent.createTest("Login to Dawak App");
-//        Pages.AndroidAppLogin().handleSplashScreens();
-//        Pages.AndroidAppLogin().loginToDawakApp();
-//    }
+    @Test(priority = 1)
+    public void loginApp() {
+        test = extent.createTest("Login to Dawak App");
+        Pages.AndroidAppLogin().handleSplashScreens();
+        Pages.AndroidAppLogin().loginToDawakApp();
+    }
 
     @Test(priority = 2)
     public void navigateToPatientPage() {
-        test.log(Status.INFO,"Navigation to Add Family Form");
+        test = extent.createTest("Navigation to Add Family Form");
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
     }
 
     @Test(priority = 3)
     public void addPatientToDawakApp() {
-        test.log(Status.INFO, "Adding A New Patient");
+        test = extent.createTest("Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
         Pages.DawakAppPatientModule().verifyOTP();
+
     }
 
     @Test(priority = 4)
     public void verifyPatientDetails() throws FileNotFoundException {
-        test.log(Status.INFO, "Verifying New Patient Details");
+        test = extent.createTest("Verifying New Patient Details");
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
 
     @Test(priority = 5)
     public void verifyPrescription() throws InterruptedException {
-        test.log(Status.INFO, "Verify prescription ID");
+        test = extent.createTest("Verify prescription ID");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
 
     @Test(priority = 6)
     public void cancelPrescription() throws InterruptedException {
-        test.log(Status.INFO, "Cancel the prescription");
+        test = extent.createTest("Cancel the prescription");
         Pages.DawakAppPrescriptionPage().clickOnGoToPharmacy();
         Pages.DawakAppPrescriptionPage().setCancelPrescriptionReason();
     }
 
     @Test(priority = 7)
     public void verifyPrescriptionCancelled() throws InterruptedException {
-        test.log(Status.INFO, "Verify that the prescription is cancelled");
+        test = extent.createTest("Verify that the prescription is cancelled");
         Pages.DawakAppLandingPage().openCancelPrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
 
@@ -78,10 +72,9 @@ public class TestRefillCancel extends BaseClass {
 
     @Test(priority = 8)
     public void removePatientFromApp() {
-        test.log(Status.INFO,"Deleting the Newly Added Patient");
+        test = extent.createTest("Deleting the Newly Added Patient");
         Pages.MobileCommon().navigateBack();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
     }
-
 }
