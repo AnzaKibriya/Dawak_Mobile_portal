@@ -15,8 +15,7 @@ public class TestRefillCancel extends BaseClass {
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
-         RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
-
+        RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
     }
 
     @Test(priority = 1)
@@ -38,7 +37,6 @@ public class TestRefillCancel extends BaseClass {
         test = extent.createTest("Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
        Pages.DawakAppPatientModule().verifyOTP();
-
     }
 
     @Test(priority = 4)

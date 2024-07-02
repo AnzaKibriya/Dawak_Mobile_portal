@@ -28,7 +28,7 @@ public class DawakAppLogin {
     public void handleSplashScreens() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(engLangBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(skipBtn)).click();
-        test.log(Status.PASS, "splash screen handled successfully");
+//        test.log(Status.PASS, "splash screen handled successfully");
 
     }
 
@@ -37,7 +37,7 @@ public class DawakAppLogin {
         mobileWait.until(ExpectedConditions.elementToBeClickable(password)).sendKeys("Password@123");//Akhil@2929
         mobileWait.until(ExpectedConditions.elementToBeClickable(signInBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
-        test.log(Status.PASS, "Login is successful");
+//        test.log(Status.PASS, "Login is successful");
 
     }
 }
