@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
@@ -11,11 +12,10 @@ import static Helper.BaseClass.client;
 public class GetShipaIdApiCall {
 
     static String shipaOrderNum;
-
+    static String apiUrl = BaseClass.propertyFile("config","url")+ "/dawak-patient/api/shipa/get-delivery-details?encounterId=" + getEncounterIDDp();;
 
     public static String makeShipaIdApiCall(String AUTH_TOKEN) {
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/shipa/get-delivery-details?encounterId=" + getEncounterIDDp();
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

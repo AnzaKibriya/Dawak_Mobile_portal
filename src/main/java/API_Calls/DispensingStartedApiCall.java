@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import model.DispensingStarted;
 import okhttp3.MediaType;
@@ -17,8 +18,7 @@ import static API_Calls.GetDPTaskApiCall.getTaskIdDp;
 import static Helper.BaseClass.prescriptionOrderID;
 
 public class DispensingStartedApiCall {
-    static String apiUrl =
-            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/dispense-inprogress-confirmation";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-portal/api/dispensing-pharmacist/dispense-inprogress-confirmation";;
 
     public static void getDispensingStartedApiCall(String AUTH_TOKEN) {
         try {

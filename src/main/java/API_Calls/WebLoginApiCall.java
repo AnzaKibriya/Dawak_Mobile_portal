@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.LoginWeb;
@@ -17,7 +18,7 @@ import static Helper.BaseClass.client;
 import static Helper.BaseClass.test;
 
 public class WebLoginApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/v2/web-login";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/v2/web-login";
     public static void makeWebLoginApiCall(String jsonFile) {
         try{
             MediaType mediaType = MediaType.parse("application/json");

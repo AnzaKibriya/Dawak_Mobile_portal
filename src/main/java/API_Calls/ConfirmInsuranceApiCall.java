@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.ConfirmInsurance;
@@ -17,9 +18,8 @@ import static API_Calls.GetCPTaskApiCall.getEncounterID;
 import static API_Calls.GetCPTaskApiCall.getTaskId;
 import static Helper.BaseClass.*;
 
-public class ConfirmInsuranceApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/confirm-insurance";
-
+public class ConfirmInsuranceApiCall  {
+    static String apiUrl = BaseClass.propertyFile("config","url")+ "/dawak-portal/api/pharmacist/confirm-insurance"; ;
     public static void getConfirmInsuranceApiCall(String AUTH_TOKEN) {
         try {
             MediaType mediaType = MediaType.parse("application/json");

@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import model.ShipaEvent;
 import okhttp3.MediaType;
@@ -16,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import static Helper.BaseClass.client;
 
 public class ShipaEventApiCall {
-    private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/shipa/webhook";
+    private static final String API_URL = BaseClass.propertyFile("config","url")+"/dawak-patient/api/shipa/webhook";
 
     public static void makeShipaEventApiCall(String AUTH_TOKEN, String orderID, String event) {
         try {

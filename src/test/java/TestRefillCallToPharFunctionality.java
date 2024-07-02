@@ -12,7 +12,7 @@ public class TestRefillCallToPharFunctionality extends BaseClass {
     String mobileUserAccessToken;
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Testing Cancel Order After Insurance Approval");
+        test = extent.createTest("Refill - Testing Call to pharmacist button functionality");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);

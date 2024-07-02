@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -14,9 +15,9 @@ import static API_Calls.GetCPTaskApiCall.getEncounterID;
 import static Helper.BaseClass.test;
 
 public class InProgressInsuranceTaskDetailsApiCall {
+    static String apiUrl= BaseClass.propertyFile("config","url")+"/dawak-portal/api/patient-refill/v3/get-task-detail/"+ getEncounterID();;
     public static List<Integer> makeInProgressInsuranceTaskDetailsApiCall(String AUTH_TOKEN){
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/patient-refill/v3/get-task-detail/"+ getEncounterID();
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

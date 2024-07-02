@@ -10,7 +10,7 @@ public class TestNewPreCallToPharmacistFunctionality extends BaseClass {
 String mobileUserAccessToken;
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Testing Cancel Order After Insurance Approval");
+        test = extent.createTest("Testing Call to pharmacist button functionality");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
@@ -65,6 +65,5 @@ String mobileUserAccessToken;
         int i =GetPatientApiCall.getPatientID();
         System.out.println("Patient id is"+i);
         DeletePatientApiCall.deletePatientApiCall(mobileUserAccessToken);
-        Pages.DawakAppPatientModule().deletePatient();
     }
 }

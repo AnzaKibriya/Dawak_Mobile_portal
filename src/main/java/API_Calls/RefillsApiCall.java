@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import model.PrescriptionRequest;
 import model.RefillRequest;
@@ -18,7 +19,7 @@ import static API_Calls.NewPatientApiCall.generateRandomEID;
 import static Helper.BaseClass.client;
 
 public class RefillsApiCall {
-    private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/prescription/detail";
+    private static final String API_URL = BaseClass.propertyFile("config","url")+"/dawak-portal/api/prescription/detail";
 
     public static void makeRefillsApiCall(String AUTH_TOKEN, String orderID) {
         try {

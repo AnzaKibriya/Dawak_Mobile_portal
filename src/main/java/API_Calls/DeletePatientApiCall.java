@@ -28,8 +28,7 @@ public class DeletePatientApiCall extends BaseClass {
         try {
             prescriptionOrderID = generateRandomNumericString();
             System.out.println(prescriptionOrderID);
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/patient/remove-patient/" + GetPatientApiCall.getPatientID();
-            ;
+            String apiUrl = BaseClass.propertyFile("config","url") + "/dawak-patient/api/patient/remove-patient/" + GetPatientApiCall.getPatientID();;
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

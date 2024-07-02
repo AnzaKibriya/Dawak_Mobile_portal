@@ -12,7 +12,7 @@ public class TestRefillPrescriptionE2E extends BaseClass {
 
     @BeforeClass
     public void createANewPrescription() {
-        test = extent.createTest("Testing Cash On Delivery Medicine Scenario");
+        test = extent.createTest("Refill - Testing Cancel order");
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
@@ -27,7 +27,7 @@ public class TestRefillPrescriptionE2E extends BaseClass {
         Pages.AndroidAppLogin().loginToDawakApp();
     }
 
-    @Test(priority = 2)
+   @Test(priority = 2)
     public void navigateToPatientPage() {
         test = extent.createTest("Navigation to Add Family Form");
         Pages.DawakAppLandingPage().navigateToPatientPage();

@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -31,7 +32,7 @@ public class CPExternalPrescriptionTaskDetails {
 
     public static void makeExternalPrescriptionTaskDetailsApiCall(String AUTH_TOKEN) {
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/patient-refill/v3/get-task-detail/" + getEncounterID();
+           String apiUrl = BaseClass.propertyFile("config","url")+ "/dawak-portal/api/patient-refill/v3/get-task-detail/" + getEncounterID();
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

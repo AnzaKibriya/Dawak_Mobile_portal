@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.Login;
@@ -16,8 +17,8 @@ import java.io.Reader;
 import static Helper.BaseClass.*;
 import static Helper.BaseClass.test;
 
-public class LoginApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/purenet/login";
+public class LoginApiCall  {
+    static String apiUrl  = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/purenet/login";;
     public static String makeLoginApiCall() {
         try{
             test.log(Status.INFO,"Create New Prescription for a New Patient");

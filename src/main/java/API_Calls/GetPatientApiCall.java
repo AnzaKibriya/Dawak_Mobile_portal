@@ -9,9 +9,10 @@ import org.json.JSONObject;
 public class GetPatientApiCall extends BaseClass {
 
     static String patientID;
+    static String apiUrl=BaseClass.propertyFile("config","url")+ "/dawak-patient/api/patient/get-patient-list";
     public static String getPatientApiCall(String AUTH_TOKEN) {
         try {
-            String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-patient/api/patient/get-patient-list";
+
             Request request = new Request.Builder()
                     .url(apiUrl)
                     .get()

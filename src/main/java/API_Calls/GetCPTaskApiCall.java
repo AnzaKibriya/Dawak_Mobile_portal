@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import okhttp3.MediaType;
@@ -15,6 +16,7 @@ import static Helper.BaseClass.test;
 public class GetCPTaskApiCall {
     public static int taskId;
     public static String encounterID;
+    static String apiurl =BaseClass.propertyFile("config","url")+"/dawak-portal/api/pharmacist/get-tasks";;
 
     public static int getTaskId() {
         return taskId;
@@ -32,9 +34,10 @@ public class GetCPTaskApiCall {
         GetCPTaskApiCall.encounterID = encounterID;
     }
 
-    static String apiurl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/get-tasks";
+
 
     public static void getTaskApiCall(String authToken, String prescriptionID) {
+
         try {
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
