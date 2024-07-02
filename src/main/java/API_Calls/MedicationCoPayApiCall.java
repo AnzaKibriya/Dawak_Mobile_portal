@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.MedicationPaymentInfo;
@@ -18,9 +19,10 @@ import static API_Calls.GetCPTaskApiCall.getEncounterID;
 import static Helper.BaseClass.test;
 
 public class MedicationCoPayApiCall {
-    private static final String API_URL = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/v2/add-copay";
+    private static final String API_URL = BaseClass.propertyFile("config","url") +"/dawak-portal/api/pharmacist/v2/add-copay";
     public static void getMedicationCoPayApiCall(String AUTH_TOKEN, int medicationRequestID, String jsonFile) {
         try {
+
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
             MedicationCoPayApiCall metforminCoPayApiCall = new MedicationCoPayApiCall();

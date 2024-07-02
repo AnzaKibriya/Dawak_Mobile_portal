@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.ClaimTask;
@@ -18,7 +19,7 @@ import static API_Calls.GetCPTaskApiCall.*;
 import static Helper.BaseClass.*;
 
 public class CPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/pharmacist/claim-task";
+    static String apiUrl = BaseClass.propertyFile("config","url")+ "/dawak-portal/api/pharmacist/claim-task"; ;
 
     public static void getTaskClaimApiCall(String AUTH_TOKEN) {
         try {

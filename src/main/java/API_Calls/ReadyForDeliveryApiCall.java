@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import model.ReadyForDelivery;
 import okhttp3.MediaType;
@@ -17,8 +18,7 @@ import static API_Calls.GetDPTaskApiCall.*;
 import static Helper.BaseClass.prescriptionOrderID;
 
 public class ReadyForDeliveryApiCall {
-    static String apiUrl =
-            "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/ready-to-pickup-confirmation";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-portal/api/dispensing-pharmacist/ready-to-pickup-confirmation";
 
     public static void getReadyForDeliveryApiCall(String AUTH_TOKEN) {
         try {

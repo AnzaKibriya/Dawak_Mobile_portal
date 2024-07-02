@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import model.DPClaimTask;
 import okhttp3.MediaType;
@@ -15,7 +16,7 @@ import static API_Calls.GetDPTaskApiCall.getEncounterIDDp;
 import static API_Calls.GetDPTaskApiCall.getTaskIdDp;
 
 public class DPClaimTaskApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/claim-task";
+    static String apiUrl = BaseClass.propertyFile("config","url") +"/dawak-portal/api/dispensing-pharmacist/claim-task";;
 
     public static void getTaskClaimApiCall(String AUTH_TOKEN) {
         try {

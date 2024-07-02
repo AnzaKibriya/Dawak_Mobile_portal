@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.CreateOtp;
@@ -17,7 +18,7 @@ import static Helper.BaseClass.client;
 import static Helper.BaseClass.test;
 
 public class WebCreateOtpApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/createOtp";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/createOtp";
     public static void createOtpApiCall(String jsonFile) {
         try{
             MediaType mediaType = MediaType.parse("application/json");

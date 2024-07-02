@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.LoginMobile;
@@ -18,7 +19,7 @@ import static Helper.BaseClass.client;
 import static Helper.BaseClass.test;
 
 public class MobileUserLoginApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/v3/mobile-login";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/v3/mobile-login";
     static String mobileUserAccessToken;
 
     public static String makeMobileLoginApiCall(String jsonFile) {

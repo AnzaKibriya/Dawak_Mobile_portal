@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
 import model.PutOTP;
@@ -17,7 +18,7 @@ import static Helper.BaseClass.client;
 import static Helper.BaseClass.test;
 
 public class WebPutOTPApiCall {
-    static String apiUrl = "https://dawak-apim-uat.azure-api.net/dawak-auth/api/auth/verifyOtp";
+    static String apiUrl = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/verifyOtp";
     static String accessToken;
 
     public static String OTPApiCall(String jsonFile) {

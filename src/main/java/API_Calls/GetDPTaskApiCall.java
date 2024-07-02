@@ -1,5 +1,6 @@
 package API_Calls;
 
+import Helper.BaseClass;
 import com.google.gson.Gson;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -30,7 +31,7 @@ public class GetDPTaskApiCall {
         GetDPTaskApiCall.encounterIDDp = encounterIDDp;
     }
 
-    static String apiurl = "https://dawak-apim-uat.azure-api.net/dawak-portal/api/dispensing-pharmacist/get-todo-tasks";
+    static String apiurl = BaseClass.propertyFile("config","url") +"/dawak-portal/api/dispensing-pharmacist/get-todo-tasks";;
 
     public static void getTaskApiCall(String authToken, String prescriptionID) {
         try {
