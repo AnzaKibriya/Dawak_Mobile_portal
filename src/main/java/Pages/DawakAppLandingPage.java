@@ -14,42 +14,44 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 
-import static Helper.BaseClass.mobileWait;
-import static Helper.BaseClass.test;
-
+import static Helper.BaseClass.*;
 
 public class DawakAppLandingPage {
     AndroidDriver androidDriver;
-    By activePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(1)");
-    By patientBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/managePatient");
-    By cancelPrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(3)");
-    By uploadPrescriptionBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadPrescription_tv");
-    By uploadPrescriptionLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadPrescription_iv");
-    By insuranceCardFrontLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadFront_iv");
-    By insuranceCardBackLink = AppiumBy.id("ae.purehealth.dawak.qa:id/uploadBack_iv");
+    By activePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/card_v\").instance(1)");
+    By patientBtn = AppiumBy.id(packageName + ":id/managePatient");
+    By cancelPrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/card_v\").instance(3)");
+    By uploadPrescriptionBtn = AppiumBy.id(packageName + ":id/uploadPrescription_tv");
+    By uploadPrescriptionLink = AppiumBy.id(packageName + ":id/uploadPrescription_iv");
+    By insuranceCardFrontLink = AppiumBy.id(packageName + ":id/uploadFront_iv");
+    By insuranceCardBackLink = AppiumBy.id(packageName + ":id/uploadBack_iv");
     By selectBtnNative = AppiumBy.id("com.google.android.documentsui:id/action_menu_select");
-    By pdfAttached = AppiumBy.id("ae.purehealth.dawak.qa:id/pdf_viewer");
-    By patientNameField = AppiumBy.id("ae.purehealth.dawak.qa:id/patient_tv");
-    By insuranceField = AppiumBy.id("ae.purehealth.dawak.qa:id/insurance_tv");
-    By patientNameRadioBtn = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/rvPatient\"]/android.view.ViewGroup");
-    By insuranceNameRadioBtn = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/rvPatient\"]/android.view.ViewGroup[1]");
-    By insuranceListConfirmBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/confirm_btn");
-    By uploadBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/upload_btn");
-    String successMessage = "ae.purehealth.dawak.qa:id/congrats_label_tv";
-    String exitAction ="ae.purehealth.dawak.qa:id/touch_outside";
-    String pageScroll = "ae.purehealth.dawak.qa:id/root_view";
-    By manageFamilyText = AppiumBy.id("ae.purehealth.dawak.qa:id/textView7");
-    By completePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(2)");
-    By totalPatientsWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/card_v\").instance(0)");
-    By talkToPhamaicstButton = AppiumBy.id("ae.purehealth.dawak.qa:id/secondary_button");
+    By pdfAttached = AppiumBy.id(packageName + ":id/pdf_viewer");
+    By patientNameField = AppiumBy.id(packageName + ":id/patient_tv");
+    By insuranceField = AppiumBy.id(packageName + ":id/insurance_tv");
+    By patientNameRadioBtn = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"" + packageName + ":id/rvPatient\"]/android.view.ViewGroup");
+    By insuranceNameRadioBtn = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"" + packageName + ":id/rvPatient\"]/android.view.ViewGroup[1]");
+    By insuranceListConfirmBtn = AppiumBy.id(packageName + ":id/confirm_btn");
+    By uploadBtn = AppiumBy.id(packageName + ":id/upload_btn");
+    String successMessage = packageName + ":id/congrats_label_tv";
+    String exitAction = packageName + ":id/touch_outside";
+    String pageScroll = packageName + ":id/root_view";
+    By manageFamilyText = AppiumBy.id(packageName + ":id/textView7");
+    By completePrescriptionWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/card_v\").instance(2)");
+    By totalPatientsWidget = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/card_v\").instance(0)");
+    By talkToPharmacistButton = AppiumBy.id(packageName + ":id/secondary_button");
     By phoneNumberFromDial = AppiumBy.id("com.google.android.dialer:id/digits");
-    DawakAddressAddition dp = new DawakAddressAddition();
+    By medicalFacilityDropDown = AppiumBy.id(packageName + ":id/title_text_view");
+    By medicalFacilityOther = AppiumBy.xpath(
+            "//android.widget.TextView[@resource-id=\"" + packageName + ":id/heading_text_view\" and @text=\"Others\"]");
+    By confirmBtn = AppiumBy.id(packageName + ":id/confirm_btn");
+
+
 
 
     public DawakAppLandingPage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
     }
-
 
 
     public void openActivePrescription() throws InterruptedException {
@@ -61,12 +63,14 @@ public class DawakAppLandingPage {
         test.log(Status.PASS, "Active prescription opened successfully");
 
     }
+
     public void totalPatientswidget() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(totalPatientsWidget)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         test.log(Status.PASS, "Successfully navigated to the total patients widget");
         Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Manage Family");
     }
+
     public void navigateToPatientPage() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
@@ -81,6 +85,7 @@ public class DawakAppLandingPage {
         Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(manageFamilyText)).getText(), "Cancelled Prescriptions");
         test.log(Status.PASS, "Successfully navigated to the  cancelled prescription widget");
     }
+
     public void openCompletedPrescription() throws InterruptedException {
         Pages.MobileCommon().waitForAPIResponseToMirrorInAPP();
         mobileWait.until(ExpectedConditions.elementToBeClickable(completePrescriptionWidget)).click();
@@ -92,6 +97,9 @@ public class DawakAppLandingPage {
 
     public void openUploadPrescriptionPage() throws IOException, InterruptedException {
         mobileWait.until(ExpectedConditions.elementToBeClickable(uploadPrescriptionBtn)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(medicalFacilityDropDown)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(medicalFacilityOther)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(confirmBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientNameField)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientNameRadioBtn)).click();
@@ -155,14 +163,10 @@ public class DawakAppLandingPage {
         Assert.assertEquals(verifySuccessMessage.getText().contains("Uploaded Successfully"), true);
         androidDriver.findElement(By.id(String.valueOf(exitAction))).click();
     }
-    public void backtoDashboardArrowButton(){
-        mobileWait.until(ExpectedConditions.elementToBeClickable(dp.mamnageAddressBackButton)).click();
-        test.log(Status.PASS, "Successfully navigated back to dashboard landing page");
-    }
-    public void talkToPharmaicst(){
-        androidDriver.findElement(By.id("ae.purehealth.dawak.qa:id/secondary_button")).click();
+    public void talkToPharmaicst() {
+        androidDriver.findElement(By.id(packageName+":id/secondary_button")).click();
         String expectedPharmacistNumber = "028150450";
         Assert.assertEquals(mobileWait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberFromDial)).getText(), expectedPharmacistNumber);
-        test.log(Status.PASS, "Successfully navigated back to dashboard landing page"+expectedPharmacistNumber);
+        test.log(Status.PASS, "Successfully navigated back to dashboard landing page" + expectedPharmacistNumber);
     }
 }

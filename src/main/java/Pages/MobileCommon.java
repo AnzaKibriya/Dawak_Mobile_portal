@@ -20,10 +20,11 @@ import static Helper.BaseClass.*;
 
 public class MobileCommon {
     AndroidDriver androidDriver;
-    By dawakAppLoader = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/success_logo_v\")");
+    By dawakAppLoader = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/success_logo_v\")");
     By addressCheckBox = AppiumBy.className("android.view.ViewGroup");
-    By homeBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/home_btn");
-    By navigateBackBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/imageView7");
+    By homeBtn = AppiumBy.id(packageName + ":id/home_btn");
+    By navigateBackBtn = AppiumBy.id(packageName+":id/imageView7");
+    By manageAddressBackButton=AppiumBy.id(packageName+":id/imageView7");
     static public JsonObject patient;
     static public JsonObject order;
 
@@ -71,14 +72,19 @@ public class MobileCommon {
         order = jsonObject.getAsJsonObject("order");
     }
 
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(homeBtn)).click();
     }
 
-    public void navigateBack(){
+    public void navigateBack() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(navigateBackBtn)).click();
         test.log(Status.PASS, "Navigated  Back successfully");
 
     }
+    public void backToDashboardArrowButton() {
+        mobileWait.until(ExpectedConditions.elementToBeClickable(manageAddressBackButton)).click();
+        test.log(Status.PASS, "Successfully navigated back to dashboard landing page");
+    }
+
 
 }

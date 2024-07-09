@@ -7,14 +7,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 import static Helper.BaseClass.mobileWait;
+import static Helper.BaseClass.packageName;
 
 public class DawakPatientDetailsPage{
 
     DawakAddressAddition dp = new DawakAddressAddition();
     AndroidDriver androidDriver;
 
-    By removePatientButton = AppiumBy.id("ae.purehealth.dawak.qa:id/remove_btn");
-    By patientButton = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/patient_list_rv\"]/android.view.ViewGroup");
+    By removePatientButton = AppiumBy.id(packageName+":id/remove_btn");
+    By patientButton = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\""+packageName+":id/patient_list_rv\"]/android.view.ViewGroup");
 
     public DawakPatientDetailsPage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -22,7 +23,7 @@ public class DawakPatientDetailsPage{
 
 
     public void clickOnRemovePatientButton(){
-        mobileWait.until(ExpectedConditions.elementToBeClickable(dp.mamnageAddressBackButton)).click();
+        Pages.MobileCommon().backToDashboardArrowButton();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         mobileWait.until(ExpectedConditions.elementToBeClickable(patientButton)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(removePatientButton)).click();

@@ -12,16 +12,16 @@ import static Helper.BaseClass.*;
 public class DawakAppPrescriptionPage {
     AndroidDriver androidDriver;
 
-    By prescriptionNumber = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/order_number_tv\")");
-    By deliverMedicationBtn = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/main_button\")");
-    By confirmLocationBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/button3");
-    By goToHomeBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/goto_home_btn");
-    By proceedBtn = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/main_button\")");
-    By goToPharmacyBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/hollow_button");
-    By cancelPrescriptionReason = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/reject_reasons_rv\"]/android.view.ViewGroup[2]");
-    By submitBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/button3");
-    By closeBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/cancel_action");
-    By cancelOrderBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/hollow_button");
+    By prescriptionNumber = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/order_number_tv\")");
+    By deliverMedicationBtn = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/main_button\")");
+    By confirmLocationBtn = AppiumBy.id(packageName + ":id/button3");
+    By goToHomeBtn = AppiumBy.id(packageName + ":id/goto_home_btn");
+    By proceedBtn = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/main_button\")");
+    By goToPharmacyBtn = AppiumBy.id(packageName + ":id/hollow_button");
+    By cancelPrescriptionReason = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"" + packageName + ":id/reject_reasons_rv\"]/android.view.ViewGroup[2]");
+    By submitBtn = AppiumBy.id(packageName + ":id/button3");
+    By closeBtn = AppiumBy.id(packageName + ":id/cancel_action");
+    By cancelOrderBtn = AppiumBy.id(packageName + ":id/hollow_button");
 
     public DawakAppPrescriptionPage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -68,7 +68,7 @@ public class DawakAppPrescriptionPage {
 
     }
 
-    public void cancelOrder(){
+    public void cancelOrder() {
         mobileWait.until(ExpectedConditions.elementToBeClickable(cancelOrderBtn)).click();
         test.log(Status.PASS, "order cancelled successfully");
 

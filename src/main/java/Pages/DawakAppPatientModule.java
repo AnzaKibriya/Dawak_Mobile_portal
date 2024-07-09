@@ -18,23 +18,23 @@ import static Pages.MobileCommon.patient;
 public class DawakAppPatientModule {
     AndroidDriver androidDriver;
     String createOrderPath = "./src/main/resources/CreateNewPatient.json";
-    String textViews = "//androidx.recyclerview.widget.RecyclerView[@resource-id='ae.purehealth.dawak.qa:id/patient_detail_rv']/android.view.ViewGroup";
-    By addFamilyBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/add_patient_btn");
-    By relationDropdown = AppiumBy.id("ae.purehealth.dawak.qa:id/relation_tv");
-    By relationOtherCheckBox = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/rvRelation\"]/android.view.ViewGroup[5]");
-    By confirmRelationBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/button3");
-    By otpFields = AppiumBy.id("ae.purehealth.dawak.qa:id/otp_view");
+    String textViews = "//androidx.recyclerview.widget.RecyclerView[@resource-id='"+packageName+":id/patient_detail_rv']/android.view.ViewGroup";
+    By addFamilyBtn = AppiumBy.id(packageName+":id/add_patient_btn");
+    By relationDropdown = AppiumBy.id(packageName+":id/relation_tv");
+    By relationOtherCheckBox = AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\""+packageName+":id/rvRelation\"]/android.view.ViewGroup[5]");
+    By confirmRelationBtn = AppiumBy.id(packageName+":id/button3");
+    By otpFields = AppiumBy.id(packageName+":id/otp_view");
 
-    By emiratesIdField = AppiumBy.id("ae.purehealth.dawak.qa:id/mask_et");
-    By registerBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/register_btn");
-    By verifyBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/next_btn");
-    By proceedBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/register_btn");
-    By successLabel = AppiumBy.id("ae.purehealth.dawak.qa:id/success_label_tv");
-    By dashboardNavigateBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/dashbord_navigator_btn");
-    By deletePatientBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/delete_v");
-    By confirmDeleteBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/confirm_button");
+    By emiratesIdField = AppiumBy.id(packageName+":id/mask_et");
+    By registerBtn = AppiumBy.id(packageName+":id/register_btn");
+    By verifyBtn = AppiumBy.id(packageName+":id/next_btn");
+    By proceedBtn = AppiumBy.id(packageName+":id/register_btn");
+    By successLabel = AppiumBy.id(packageName+":id/success_label_tv");
+    By dashboardNavigateBtn = AppiumBy.id(packageName+":id/dashbord_navigator_btn");
+    By deletePatientBtn = AppiumBy.id(packageName+":id/delete_v");
+    By confirmDeleteBtn = AppiumBy.id(packageName+":id/confirm_button");
     String patientRemoveMessage = "//android.widget.Toast[@text=\"Patient removed successfully\"]";
-    By manageFamilyText = AppiumBy.id("ae.purehealth.dawak.qa:id/textView7");
+    By manageFamilyText = AppiumBy.id(packageName+":id/textView7");
 
     public DawakAppPatientModule(AndroidDriver AndroidDriver) {
         androidDriver = AndroidDriver;

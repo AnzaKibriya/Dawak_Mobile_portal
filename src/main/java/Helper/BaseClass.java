@@ -25,6 +25,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -52,7 +53,8 @@ public class BaseClass {
     public static AndroidDriver androidDriver;
     public static String emiratesID;
     public static String formattedDate;
-    static FileInputStream fis ;
+    public static String packageName;
+    static FileInputStream fis;
 
     public static String propertyFile(String PropFileName, String stringName) {
         try {
@@ -66,14 +68,15 @@ public class BaseClass {
     }
 
     @BeforeSuite
-    public void setUp() throws MalformedURLException {
+    public void setUp() throws IOException {
         client = new OkHttpClient();
+        prop = new Properties();
+        packageName = propertyFile("Config", "packageName");
         androidDriver = new AndroidDriver(new URL("http://localhost:4723"), getAPKOptions());
         androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(07));
         androidDriver.setFileDetector(new LocalFileDetector());
         softAssert = new SoftAssert();
         extent = new ExtentReports();
-        prop = new Properties();
         mobileWait = new WebDriverWait(androidDriver, Duration.ofSeconds(12));
         ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter("target/Dawak_Mobile_Portal.html");
         extent.attachReporter(extentSparkReporter);
@@ -81,7 +84,6 @@ public class BaseClass {
         Pages.AndroidAppLogin().loginToDawakApp();
 
     }
-
 
 
     public static String screenshot(String filename) throws IOException {
@@ -97,7 +99,7 @@ public class BaseClass {
             test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + "Test case failed", ExtentColor.RED));
             test.fail(result.getThrowable());
             String timestamp = new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
-            String destination = screenshot("Failed Scenario Screenshot"+timestamp);
+            String destination = screenshot("Failed Scenario Screenshot" + timestamp);
             test.fail(result.getThrowable()).addScreenCaptureFromPath(destination);
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + "Test case passed", ExtentColor.GREEN));
@@ -122,11 +124,12 @@ public class BaseClass {
         }
         return prescriptionOrderID;
     }
+
     public static String getCurrentDateTime() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         DateTimeFormatter formatte = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        formattedDate=now.format(formatte);
+        formattedDate = now.format(formatte);
         return now.format(formatter);
     }
 

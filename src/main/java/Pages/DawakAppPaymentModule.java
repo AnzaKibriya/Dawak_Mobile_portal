@@ -7,23 +7,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Helper.BaseClass.mobileWait;
+import static Helper.BaseClass.packageName;
 
 public class DawakAppPaymentModule {
     AndroidDriver androidDriver;
-    By timeSlotDropDown = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ae.purehealth.dawak.qa:id/choose_time_slot_v\")");
+    By timeSlotDropDown = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/choose_time_slot_v\")");
     By timeSlotCheckBox = AppiumBy.androidUIAutomator("new UiSelector().textContains(\"10:00 PM - 10:30 PM\")");
-    By confirmTimeSlotBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/button3");
+    By confirmTimeSlotBtn = AppiumBy.id(packageName + ":id/button3");
     By goToHomeAfterPayment = AppiumBy.xpath("//android.widget.Button[@text='GO TO HOME']");
-    By placeOrderBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/place_order_btn");
-    String dateSlotScroll = "ae.purehealth.dawak.qa:id/rvDatesSlots";
-    String pageScroll = "ae.purehealth.dawak.qa:id/root_view";
-    By paymentByCardBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/mode_of_payment_card_v");
-    By cardHolderName = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_cardholder_name");
-    By cardNumber = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_card_number");
-    By cardExpire = AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_expiration");
-    By cardCvv= AppiumBy.id("ae.purehealth.dawak.qa:id/bt_card_form_cvv");
-    By payNowBtn = AppiumBy.id("ae.purehealth.dawak.qa:id/pt2_pay_button_id");
-
+    By placeOrderBtn = AppiumBy.id(packageName + ":id/place_order_btn");
+    String dateSlotScroll = packageName + ":id/rvDatesSlots";
+    String pageScroll = packageName + ":id/root_view";
+    By paymentByCardBtn = AppiumBy.id(packageName + ":id/mode_of_payment_card_v");
+    By cardHolderName = AppiumBy.id(packageName + ":id/bt_card_form_cardholder_name");
+    By cardNumber = AppiumBy.id(packageName + ":id/bt_card_form_card_number");
+    By cardExpire = AppiumBy.id(packageName + ":id/bt_card_form_expiration");
+    By cardCvv = AppiumBy.id(packageName + ":id/bt_card_form_cvv");
+    By payNowBtn = AppiumBy.id(packageName + ":id/pt2_pay_button_id");
 
 
     public DawakAppPaymentModule(AndroidDriver androidDriver) {

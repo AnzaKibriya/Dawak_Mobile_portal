@@ -18,24 +18,24 @@ public class TestDasboardWidgetPages extends BaseClass {
     public void verifyTotalPatientNavigationScreen() throws AWTException, InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().totalPatientswidget();
-        Pages.DawakAppLandingPage().backtoDashboardArrowButton();
+        Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 3)
     public void verifyActivePrescriptionNavigationScreen() throws AWTException, InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().openActivePrescription();
-        Pages.DawakAppLandingPage().backtoDashboardArrowButton();
+        Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 3)
     public void verifyCancelledPrescriptionNavigationScreen() throws AWTException, InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().openCancelPrescription();
-        Pages.DawakAppLandingPage().backtoDashboardArrowButton();
+        Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 4)
     public void verifyCompletedPrescriptionNavigationScreen() throws AWTException, InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().openCompletedPrescription();
-        Pages.DawakAppLandingPage().backtoDashboardArrowButton();
+        Pages.MobileCommon().backToDashboardArrowButton();
     }
 }

@@ -18,7 +18,7 @@ import static Helper.BaseClass.*;
 import static Helper.BaseClass.test;
 
 public class LoginApiCall  {
-    static String apiUrl  = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/purenet/login";;
+    static String apiUrl  = BaseClass.propertyFile("config","url")+"/dawak-auth/api/auth/purenet/login";
     public static String makeLoginApiCall() {
         try{
             test.log(Status.INFO,"Create New Prescription for a New Patient");

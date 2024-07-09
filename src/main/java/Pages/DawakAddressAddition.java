@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import static Helper.BaseClass.mobileWait;
+import static Helper.BaseClass.packageName;
 
 public class DawakAddressAddition {
 
@@ -23,30 +24,30 @@ public class DawakAddressAddition {
         androidDriver = AndroidDriver;
     }
 
-    By profilebtn= AppiumBy.id("ae.purehealth.dawak.qa:id/profile_btn");
+    By profileBtn= AppiumBy.id(packageName+":id/profile_btn");
 
-    By manageAddress=AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/primary_option_rv\"]/android.widget.FrameLayout[1]/android.view.ViewGroup");
+    By manageAddress=AppiumBy.xpath("//androidx.recyclerview.widget.RecyclerView[@resource-id=\""+packageName+":id/primary_option_rv\"]/android.widget.FrameLayout[1]/android.view.ViewGroup");
 
-    By addaddressbtn=AppiumBy.id("ae.purehealth.dawak.qa:id/add_patient_btn");
-
-
-    By search=AppiumBy.id("ae.purehealth.dawak.qa:id/search_view");
+    By addAddressBtn=AppiumBy.id(packageName+":id/add_patient_btn");
 
 
-    By searchBar=AppiumBy.id("ae.purehealth.dawak.qa:id/places_autocomplete_search_bar");
+    By search=AppiumBy.id(packageName+":id/search_view");
 
 
-    By address=AppiumBy.id("//android.widget.TextView[@resource-id=\"ae.purehealth.dawak.qa:id/places_autocomplete_prediction_secondary_text\" and @text=\"Abu Dhabi - United Arab Emirates\"]");
+    By searchBar=AppiumBy.id(packageName+":id/places_autocomplete_search_bar");
 
-    By savebtn=AppiumBy.id("ae.purehealth.dawak.qa:id/save_btn");
 
-    By savechanges=AppiumBy.id("ae.purehealth.dawak.qa:id/button");
+    By address=AppiumBy.id("//android.widget.TextView[@resource-id=\""+packageName+":id/places_autocomplete_prediction_secondary_text\" and @text=\"Abu Dhabi - United Arab Emirates\"]");
 
-    By getAddress=AppiumBy.id("ae.purehealth.dawak.qa:id/lyAddress1");
+    By saveBtn=AppiumBy.id(packageName+":id/save_btn");
 
-    By mamnageAddressBackButton=AppiumBy.id("ae.purehealth.dawak.qa:id/imageView7");
+    By saveChanges=AppiumBy.id(packageName+":id/button");
 
-    By profileBackButton=AppiumBy.id("ae.purehealth.dawak.qa:id/imageView7");
+    By getAddress=AppiumBy.id(packageName+":id/lyAddress1");
+
+    By manageAddressBackButton=AppiumBy.id(packageName+":id/imageView7");
+
+    By profileBackButton=AppiumBy.id(packageName+":id/imageView7");
 
     By savedAddress=AppiumBy.id("//androidx.recyclerview.widget.RecyclerView[@resource-id=\"ae.purehealth.dawak.qa:id/rvAddress\"]/android.widget.FrameLayout/android.view.ViewGroup");
 
@@ -56,10 +57,10 @@ public class DawakAddressAddition {
 
 
     public void addAddress() throws AWTException, InterruptedException {
-        mobileWait.until(ExpectedConditions.elementToBeClickable(profilebtn)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(profileBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(manageAddress)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(addaddressbtn)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(addAddressBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         mobileWait.until(ExpectedConditions.elementToBeClickable(search)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(searchBar)).sendKeys("SKMC");
@@ -69,13 +70,13 @@ public class DawakAddressAddition {
         robot.keyRelease(KeyEvent.VK_DOWN);
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-        mobileWait.until(ExpectedConditions.elementToBeClickable(savebtn)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(saveBtn)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         String addressBeforesaved= androidDriver.findElement((address)).getText();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(savechanges)).click();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(mamnageAddressBackButton)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(saveChanges)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(manageAddressBackButton)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(profileBackButton)).click();
-        mobileWait.until(ExpectedConditions.elementToBeClickable(profilebtn)).click();
+        mobileWait.until(ExpectedConditions.elementToBeClickable(profileBtn)).click();
         mobileWait.until(ExpectedConditions.elementToBeClickable(manageAddress)).click();
         Pages.MobileCommon().waitForLoaderInvisibility();
         Assert.assertEquals(addressBeforesaved,androidDriver.findElement((savedAddress)).getText());
