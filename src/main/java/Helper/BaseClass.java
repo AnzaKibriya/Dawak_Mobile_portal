@@ -73,7 +73,7 @@ public class BaseClass {
         prop = new Properties();
         packageName = propertyFile("Config", "packageName");
         androidDriver = new AndroidDriver(new URL("http://localhost:4723"), getAPKOptions());
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(07));
+        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         androidDriver.setFileDetector(new LocalFileDetector());
         softAssert = new SoftAssert();
         extent = new ExtentReports();

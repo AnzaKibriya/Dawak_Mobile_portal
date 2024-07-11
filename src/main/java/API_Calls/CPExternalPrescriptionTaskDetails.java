@@ -47,6 +47,8 @@ public class CPExternalPrescriptionTaskDetails {
                 System.out.println("Response: " + dataArray);
                 for (int i = 0; i < dataArray.length(); i++) {
                     JSONObject dataObject = dataArray.getJSONObject(i);
+                    int ab = dataObject.getInt("externalPrescriptionId");
+                    setExternalPrescriptionId(dataObject.getInt("externalPrescriptionId"));
                     JSONArray medicationsArray = dataObject.getJSONArray("prescriptionFiles");
                     for (int j = 0; j < medicationsArray.length(); j++) {
                         JSONObject medicationObject = medicationsArray.getJSONObject(j);

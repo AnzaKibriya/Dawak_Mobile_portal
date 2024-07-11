@@ -1,49 +1,56 @@
 import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
+import model.InsuranceCardVerification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+
 public class TestUploadPrescription extends BaseClass {
-    @BeforeClass
-    public void createANewPrescription() {
-        test = extent.createTest("Login to Dawak App");
+//    @BeforeClass
+//    public void createANewPrescription() {
+//        test = extent.createTest("Login to Dawak App");
 //        accessToken = LoginApiCall.makeLoginApiCall();
 //        prescriptionOrderID = generateRandomNumericString();
 //        System.out.println(prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
 //        NewPatientApiCall.makeCreatePatientApiCall(accessToken, prescriptionOrderID);
-    }
+//    }
     String cpAccessToken, dpAccessToken;
 
-//    @Test(priority = 1)
-//    public void webCentralPharma() {
-//        test = extent.createTest("Sending For Insurance Approval from CP Portal through API");
-//        WebLoginApiCall.makeWebLoginApiCall("LoginCP");
-//        WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
-//        cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
-//        GetCPTaskApiCall.getTaskApiCall(cpAccessToken, "5335201714");
-//        CPClaimTaskApiCall.getTaskClaimApiCall(cpAccessToken);
-//        CPExternalPrescriptionTaskDetails.makeExternalPrescriptionTaskDetailsApiCall(cpAccessToken);
-////        SendForInsuranceApiCall.getSendForInsuranceApiCall(cpAccessToken);
-//        List<Integer> medicationRequestIDs = InProgressInsuranceTaskDetailsApiCall.makeInProgressInsuranceTaskDetailsApiCall(cpAccessToken);
-//        assert medicationRequestIDs != null;
-//        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(1), "MetforminaAddCopay");
-//        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(0), "MontelukastAddCopay");
-//        ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
-//    }
-
-    //
-
-    @Test(priority = 2)
-    public void navigateToPatientPage() throws InterruptedException {
-        test = extent.createTest("Navigation to Add Family Form");
-        Pages.DawakAppLandingPage().navigateToPatientPage();
-        Pages.DawakAppLandingPage().openActivePrescription();
-        Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
+    @Test(priority = 1)
+    public void webCentralPharma() {
+        test = extent.createTest("Sending For Insurance Approval from CP Portal through API");
+        WebLoginApiCall.makeWebLoginApiCall("LoginCP");
+        WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
+        cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
+        GetCPTaskApiCall.getTaskApiCall(cpAccessToken, "5126032386");
+        CPClaimTaskApiCall.getTaskClaimApiCall(cpAccessToken);
+        CPExternalPrescriptionTaskDetails.makeExternalPrescriptionTaskDetailsApiCall(cpAccessToken);
+        InsuranceCardVerificationApiCall.makeInsuranceCardVerificationAPICall("Front", cpAccessToken);
+        InsuranceCardVerificationApiCall.makeInsuranceCardVerificationAPICall("Back", cpAccessToken);
+        VerifyExternalMedicationApiCall.makeVerifyExternalMedicationApiCall((cpAccessToken));
+        ProceedExternalPrescriptionApiCall.makeProceedExternalPrescriptionApiCall(cpAccessToken);
+//        SendForInsuranceApiCall.getSendForInsuranceApiCall(cpAccessToken);
+        List<Integer> medicationRequestIDs = InProgressInsuranceTaskDetailsApiCall.makeInProgressInsuranceTaskDetailsApiCall(cpAccessToken);
+        assert medicationRequestIDs != null;
+        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(1), "MetforminaAddCopay");
+        MedicationCoPayApiCall.getMedicationCoPayApiCall(cpAccessToken, medicationRequestIDs.get(0), "MontelukastAddCopay");
+        ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
     }
+
+
+
+//    @Test(priority = 2)
+//    public void navigateToPatientPage() throws InterruptedException {
+//        test = extent.createTest("Navigation to Add Family Form");
+//        Pages.DawakAppLandingPage().navigateToPatientPage();
+//        Pages.DawakAppLandingPage().openActivePrescription();
+//        Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
+//    }
 
 //    @Test(priority = 3)
 //    public void addPatientToDawakApp() {
@@ -59,10 +66,10 @@ public class TestUploadPrescription extends BaseClass {
 //        Pages.DawakAppPatientModule().navigateBackToDashboard();
 //    }
 
-    @Test(priority = 5)
-    public void uploadPrescription() throws IOException, InterruptedException {
+//    @Test(priority = 5)
+//    public void uploadPrescription() throws IOException, InterruptedException {
 ////        Pages.DawakAppLandingPage().navigateToPatientPage();
 //        Pages.DawakAppLandingPage().openUploadPrescriptionPage();
 //
-    }
+//    }
 }
