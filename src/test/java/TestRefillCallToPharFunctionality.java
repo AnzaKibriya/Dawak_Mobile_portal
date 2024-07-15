@@ -55,9 +55,9 @@ public class TestRefillCallToPharFunctionality extends BaseClass {
     }
 
     @Test(priority = 6)
-    public void talktopharmacist() throws FileNotFoundException {
+    public void talkToPharmacist() throws FileNotFoundException {
         test = extent.createTest("Open Prescription and Verify ID");
-        Pages.DawakAppLandingPage().talkToPharmaicst();
+        Pages.DawakAppLandingPage().talkToPharmacist();
     }
     @Test(priority = 10)
     public void removePatientFromApp() {

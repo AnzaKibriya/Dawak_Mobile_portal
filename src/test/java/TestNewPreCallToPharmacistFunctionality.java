@@ -55,7 +55,7 @@ String mobileUserAccessToken;
     @Test(priority = 6)
     public void talktopharmacist() throws FileNotFoundException {
         test = extent.createTest("Click on talk to pharmacist and verify");
-        Pages.DawakAppLandingPage().talkToPharmaicst();
+        Pages.DawakAppLandingPage().talkToPharmacist();
     }
     @Test(priority = 7)
     public void removePatientFromApp() {

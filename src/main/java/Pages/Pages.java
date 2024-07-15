@@ -55,4 +55,10 @@ public class Pages {
         return pg;
     }
 
+    public static DawakExternalPrescription DawakExternalPrescription(){
+        DawakExternalPrescription pg = new DawakExternalPrescription((AndroidDriver) BaseClass.androidDriver);
+        PageFactory.initElements(BaseClass.androidDriver, pg);
+        return pg;
+    }
+
 }

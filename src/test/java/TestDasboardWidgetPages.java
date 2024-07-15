@@ -17,7 +17,7 @@ public class TestDasboardWidgetPages extends BaseClass {
     @Test(priority = 2)
     public void verifyTotalPatientNavigationScreen() throws AWTException, InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
-        Pages.DawakAppLandingPage().totalPatientswidget();
+        Pages.DawakAppLandingPage().totalPatientsWidget();
         Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 3)

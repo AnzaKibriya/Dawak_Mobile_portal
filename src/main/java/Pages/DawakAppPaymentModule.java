@@ -12,7 +12,7 @@ import static Helper.BaseClass.packageName;
 public class DawakAppPaymentModule {
     AndroidDriver androidDriver;
     By timeSlotDropDown = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"" + packageName + ":id/choose_time_slot_v\")");
-    By timeSlotCheckBox = AppiumBy.androidUIAutomator("new UiSelector().textContains(\"10:00 PM - 10:30 PM\")");
+    By timeSlotCheckBox = AppiumBy.androidUIAutomator("new UiSelector().textContains(\"10:00 PM - 11:00 PM\")");
     By confirmTimeSlotBtn = AppiumBy.id(packageName + ":id/button3");
     By goToHomeAfterPayment = AppiumBy.xpath("//android.widget.Button[@text='GO TO HOME']");
     By placeOrderBtn = AppiumBy.id(packageName + ":id/place_order_btn");

@@ -67,15 +67,15 @@ public class DawakAppPatientModule {
     public void verifyPatientDetailsAndProceed() throws FileNotFoundException {
         List<WebElement> listviews = androidDriver.findElements(By.xpath(textViews));
         Pages.MobileCommon().loadJson(createOrderPath);
-        softAssert.assertEquals(patient.getAsJsonPrimitive("eid").getAsString(), listviews.get(0).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
-        softAssert.assertEquals(prescriptionOrderID, listviews.get(0).findElement(By.id("ae.purehealth.dawak.qa:id/description_2_tv")).getText());
-        softAssert.assertEquals(patient.getAsJsonPrimitive("dob").getAsString().replaceAll("/", "-"), listviews.get(1).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
-        softAssert.assertEquals("9715" + prescriptionOrderID, listviews.get(2).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
-        softAssert.assertEquals("Others", listviews.get(2).findElement(By.id("ae.purehealth.dawak.qa:id/description_2_tv")).getText());
-        softAssert.assertEquals(patient.getAsJsonObject("nationality").getAsJsonPrimitive("value").getAsString(), listviews.get(3).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
-        softAssert.assertEquals(patient.getAsJsonPrimitive("patGender"), listviews.get(3).findElement(By.id("ae.purehealth.dawak.qa:id/description_2_tv")).getText());
-        softAssert.assertEquals(patient.getAsJsonObject("maritalStatus").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id("ae.purehealth.dawak.qa:id/description_tv")).getText());
-        softAssert.assertEquals(patient.getAsJsonObject("language").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id("ae.purehealth.dawak.qa:id/description_2_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonPrimitive("eid").getAsString(), listviews.get(0).findElement(By.id(packageName+":id/description_tv")).getText());
+        softAssert.assertEquals(prescriptionOrderID, listviews.get(0).findElement(By.id(packageName+":id/description_2_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonPrimitive("dob").getAsString().replaceAll("/", "-"), listviews.get(1).findElement(By.id(packageName+":id/description_tv")).getText());
+        softAssert.assertEquals("9715" + prescriptionOrderID, listviews.get(2).findElement(By.id(packageName+ ":id/description_tv")).getText());
+        softAssert.assertEquals("Others", listviews.get(2).findElement(By.id(packageName+":id/description_2_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonObject("nationality").getAsJsonPrimitive("value").getAsString(), listviews.get(3).findElement(By.id(packageName+":id/description_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonPrimitive("patGender"), listviews.get(3).findElement(By.id(packageName+":id/description_2_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonObject("maritalStatus").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id(packageName+":id/description_tv")).getText());
+        softAssert.assertEquals(patient.getAsJsonObject("language").getAsJsonPrimitive("value").getAsString(), listviews.get(4).findElement(By.id(packageName+":id/description_2_tv")).getText());
         mobileWait.until(ExpectedConditions.elementToBeClickable(proceedBtn)).click();
         test.log(Status.PASS, "successfully verified patient and proceed");
 

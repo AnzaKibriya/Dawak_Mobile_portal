@@ -3,62 +3,58 @@ package API_Calls;
 import Helper.BaseClass;
 import com.aventstack.extentreports.Status;
 import com.google.gson.Gson;
-import model.ClaimTask;
+import model.AddExternalMedication;
+import model.ProceedExternalPrescription;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import static API_Calls.GetCPTaskApiCall.*;
-import static Helper.BaseClass.*;
+import static API_Calls.GetCPTaskApiCall.getEncounterID;
+import static Helper.BaseClass.client;
+import static Helper.BaseClass.test;
 
-public class CPClaimTaskApiCall {
-    static String apiUrl = BaseClass.propertyFile("config","url")+ "/dawak-portal/api/pharmacist/claim-task"; ;
+public class ExternalPrescriptionAddMedicationApiCall {
+    static String apiUrl = BaseClass.propertyFile("config", "url") + "/dawak-portal/api/pharmacist/add-medication";
 
-    public static void getTaskClaimApiCall(String AUTH_TOKEN) {
+    public static void makeExternalPrescriptionAddMedicationApiCall(String authToken) {
         try {
+            test.log(Status.INFO, "Add Medication For External Prescription");
             MediaType mediaType = MediaType.parse("application/json");
             Gson gson = new Gson();
-            CPClaimTaskApiCall claimTaskApiCall = new CPClaimTaskApiCall();
-            String jsonPayload = gson.toJson(claimTaskApiCall.getClaimTask());
+            ExternalPrescriptionAddMedicationApiCall externalPrescriptionAddMedicationApiCall = new ExternalPrescriptionAddMedicationApiCall();
+            String jsonPayload = gson.toJson(externalPrescriptionAddMedicationApiCall.getAddExternalMedication());
             RequestBody body = RequestBody.create(jsonPayload, mediaType);
             Request request = new Request.Builder()
                     .url(apiUrl)
-                    .post(body)
+                    .header("Authorization", "Bearer " + authToken)
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("Authorization", "Bearer " + AUTH_TOKEN)
+                    .post(RequestBody.create(jsonPayload, MediaType.parse("application/json")))
                     .build();
             Response response = client.newCall(request).execute();
-
             if (response.isSuccessful()) {
-                test.log(Status.PASS, "Get task API claim called successfully");
                 JSONObject jsonResponse = new JSONObject(response.body().string());
                 System.out.println(jsonResponse);
-
             } else {
                 System.out.println("API call failed!");
                 System.out.println("Response: " + response.body().string());
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    public ClaimTask getClaimTask() {
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CPClaimTask.json"))) {
+    public AddExternalMedication getAddExternalMedication() {
+        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream("/AddExternalMedication.json"))) {
             Gson gson = new Gson();
-            ClaimTask result = gson.fromJson(reader, ClaimTask.class);
-            result.setTaskId(String.valueOf(getTaskId()));
-            result.setId(Integer.parseInt(getEncounterID()));
-            result.setEncounterId(prescriptionOrderID);//prescriptionOrderID
+            AddExternalMedication result = gson.fromJson(reader, AddExternalMedication.class);
+            result.setId(getEncounterID());
+            result.setPrescriptionNumber(getEncounterID());
             System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -67,4 +63,3 @@ public class CPClaimTaskApiCall {
         }
     }
 }
-

@@ -1,0 +1,17 @@
+{
+  "comment": "Test",
+  "copay": 2,
+  "daysSupply": 0,
+  "healthPlan": 3,
+  "id": "3245",
+  "medicationMasterId": 1,
+  "prescribedBy": "test",
+  "prescriptionNumber": "3245",
+  "quantity": 1,
+  "quantityRemaining": 1,
+  "refillQuantity": 1,
+  "refillRemaining": 1,
+  "rejectionReason": "",
+  "sigCodes": "DIS8W: Dissolve 1 tablet in 8mL water & drink as instructed.,",
+  "sigCodesList": "DIS8W,"
+}
