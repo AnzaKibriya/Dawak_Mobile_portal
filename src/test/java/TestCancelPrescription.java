@@ -1,8 +1,7 @@
+import API_Calls.LoginApiCall;
 import API_Calls.NewPatientApiCall;
 import Helper.BaseClass;
 import Pages.Pages;
-import API_Calls.LoginApiCall;
-import API_Calls.PrescriptionApiCall;
 import com.aventstack.extentreports.Status;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

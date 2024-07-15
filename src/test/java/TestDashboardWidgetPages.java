@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import java.awt.*;
 
-public class TestDasboardWidgetPages extends BaseClass {
+public class TestDashboardWidgetPages extends BaseClass {
 
 
     @Test(priority = 1)
@@ -21,13 +21,13 @@ public class TestDasboardWidgetPages extends BaseClass {
         Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 3)
-    public void verifyActivePrescriptionNavigationScreen() throws AWTException, InterruptedException {
+    public void verifyActivePrescriptionNavigationScreen() throws InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.MobileCommon().backToDashboardArrowButton();
     }
     @Test(priority = 3)
-    public void verifyCancelledPrescriptionNavigationScreen() throws AWTException, InterruptedException {
+    public void verifyCancelledPrescriptionNavigationScreen() throws InterruptedException {
         test = extent.createTest("Verify the Patient Navigation Screen");
         Pages.DawakAppLandingPage().openCancelPrescription();
         Pages.MobileCommon().backToDashboardArrowButton();

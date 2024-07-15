@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import static Helper.BaseClass.client;
 import static Helper.BaseClass.test;
 
-public class GetCPTaskApiCall {
+public class GetCallCenterTaskApiCall {
     public static int taskId;
     public static String encounterID;
     static String apiurl = BaseClass.propertyFile("config", "url") + "/dawak-portal/api/pharmacist/get-tasks";
@@ -36,7 +36,7 @@ public class GetCPTaskApiCall {
     }
 
 
-    public static void getTaskApiCall(String authToken, String prescriptionID) {
+    public static void getCallCenterTaskApiCall(String authToken, String prescriptionID) {
 
         try {
             MediaType mediaType = MediaType.parse("application/json");
