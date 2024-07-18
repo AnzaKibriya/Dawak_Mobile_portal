@@ -23,52 +23,48 @@ public class TestCashOnDeliveryMedicine extends BaseClass {
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
+        test.log(Status.INFO, "We are working on "+ prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
         NewPatientApiCall.makeCreatePatientApiCall(accessToken, prescriptionOrderID);
     }
 
-//    @Test(priority = 1)
-//    public void loginApp() {
-//        test = extent.createTest("Login to Dawak App");
-//        Pages.AndroidAppLogin().handleSplashScreens();
-//        Pages.AndroidAppLogin().loginToDawakApp();
-//    }
-
-    @Test(priority = 2)
-    public void navigateToPatientPage() {
+    @Test(priority = 1)
+    public void navigateToPatientPage() throws InterruptedException {
         test.log(Status.INFO,"Navigation to Add Family Form");
+        Pages.MobileCommon().launchApp();
+
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void addPatientToDawakApp() {
         test.log(Status.INFO,"Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
         Pages.DawakAppPatientModule().verifyOTP();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 3)
     public void verifyPatientDetails() throws FileNotFoundException {
         test.log(Status.INFO, "Verifying New Patient Details");
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void verifyPrescription() throws InterruptedException {
         test.log(Status.INFO,"Open Prescription and Verify ID");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
 
-    @Test(priority = 6)
+    @Test(priority = 5)
     public void sendPrescriptionForDelivery() throws InterruptedException {
         test.log(Status.INFO,"Deliver Medicine Functionality");
         Pages.DawakAppPrescriptionPage().deliverMedicine();
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public void webCentralPharma() {
         test.log(Status.INFO, "Sending For Insurance Approval from CP Portal through API");
         WebLoginApiCall.makeWebLoginApiCall("LoginCP");
@@ -84,7 +80,7 @@ public class TestCashOnDeliveryMedicine extends BaseClass {
         ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
     }
 
-    @Test(priority = 8)
+    @Test(priority = 7)
     public void paymentCashOnDelivery() throws InterruptedException {
         test.log(Status.INFO, "Cash on Delivery Payment Scenario");
 
@@ -94,7 +90,7 @@ public class TestCashOnDeliveryMedicine extends BaseClass {
         Pages.DawakAppPaymentModule().placeOrderSuccessfully();
     }
 
-    @Test(priority = 9)
+    @Test(priority = 8)
     public void webDispensingPortal() {
         test.log(Status.INFO, "Dispensing Medication from Dp Portal through API");
         WebLoginApiCall.makeWebLoginApiCall("LoginDP");
@@ -109,11 +105,16 @@ public class TestCashOnDeliveryMedicine extends BaseClass {
         ShipaEventApiCall.makeShipaEventApiCall(dpAccessToken, shipaOrderNum, "Completed");
     }
 
-    @Test(priority = 10)
+    @Test(priority = 9)
     public void removePatientFromApp() {
         test.log(Status.INFO,"Deleting the Newly Added Patient");
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
+        Pages.MobileCommon().backToDashboardArrowButton();
+    }
+    @Test(priority = 10)
+    public void closeDawakApp(){
+        Pages.MobileCommon().closeApp();
     }
 
 }

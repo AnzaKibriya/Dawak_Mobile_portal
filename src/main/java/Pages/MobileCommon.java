@@ -86,5 +86,16 @@ public class MobileCommon {
         test.log(Status.PASS, "Successfully navigated back to dashboard landing page");
     }
 
+    public void closeApp() {
+//        androidDriver.resetApp();
+        androidDriver.terminateApp(packageName);
+    }
+
+    public void launchApp() throws InterruptedException {
+//        androidDriver.launchApp();
+        androidDriver.activateApp(packageName);
+        Thread.sleep(7000);
+
+    }
 
 }

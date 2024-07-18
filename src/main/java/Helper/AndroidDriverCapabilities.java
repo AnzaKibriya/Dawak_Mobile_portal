@@ -18,7 +18,7 @@ public class AndroidDriverCapabilities {
                 .setApp(apkPath)
                 .autoGrantPermissions()
                 .setAutoGrantPermissions(true)
-                .setNewCommandTimeout(Duration.ofMinutes(35))
+                .setNewCommandTimeout(Duration.ofMinutes(60))
                 .setNoReset(false);
         options.setCapability("appium:settings[ignoreUnimportantViews]", true);
         return options;

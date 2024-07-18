@@ -55,6 +55,7 @@ public class BaseClass {
     public static String formattedDate;
     public static String packageName;
     static FileInputStream fis;
+    protected static ThreadLocal<ExtentTest> threadtest = new ThreadLocal<>();
 
     public static String propertyFile(String PropFileName, String stringName) {
         try {
@@ -132,7 +133,11 @@ public class BaseClass {
         formattedDate = now.format(formatte);
         return now.format(formatter);
     }
-
+    public ExtentTest createTest(String testName) {
+        ExtentTest extentTest = extent.createTest(testName);
+        threadtest.set(extentTest);
+        return extentTest;
+    }
     @AfterSuite
     public void tearDown() {
         extent.flush();

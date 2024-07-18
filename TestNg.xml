@@ -1,17 +1,58 @@
 <suite name="Dawak">
-    <test name="Dawak Android App Adding a new patient">
+    <test name="Dawak Android App Test Cancel Order After Insurance Approval">
+        <classes>
+            <class name="TestCancelOrderAfterInsuranceApproval"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Cancel Prescription">
+        <classes>
+            <class name="TestCancelPrescription"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Cash On Delivery Medicine">
         <classes>
             <class name="TestCashOnDeliveryMedicine"/>
         </classes>
     </test>
-    <test name="Dawak Android App Test Refill Cancel Prescription">
+    <test name="Dawak Android App Test Dashboard Widget Pages">
+        <classes>
+            <class name="TestDashboardWidgetPages"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test New Pre Call To Pharmacist Functionality">
+        <classes>
+            <class name="TestNewPreCallToPharmacistFunctionality"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test New Prescription Remove Patient">
+        <classes>
+            <class name="TestNewPrescriptionRemovePatient"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Refill Call To Phar Functionality">
+        <classes>
+            <class name="TestRefillCallToPharFunctionality"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Refill Cancel">
         <classes>
             <class name="TestRefillCancel"/>
         </classes>
     </test>
-    <test name="Dawak Android App TestCancelPrescription">
+    <test name="Dawak Android App Test Refill Cancel Order After Insurance Approval">
         <classes>
-            <class name="TestCancelPrescription"/>
+            <class name="TestRefillCancelOrderAfterInsuranceApproval"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Refill Prescription E2E">
+        <classes>
+            <class name="TestRefillPrescriptionE2E"/>
+        </classes>
+    </test>
+
+    <test name="Dawak Android App Test Upload Prescription">
+        <classes>
+            <class name="TestUploadPrescription"/>
         </classes>
     </test>
 </suite>

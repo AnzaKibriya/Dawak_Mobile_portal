@@ -1,6 +1,7 @@
 import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
+import com.aventstack.extentreports.Status;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,54 +18,49 @@ public class TestRefillCancelOrderAfterInsuranceApproval extends BaseClass {
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
+        test.log(Status.INFO, "We are working on "+ prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
         RefillsApiCall.makeRefillsApiCall(accessToken, prescriptionOrderID);
     }
 
     @Test(priority = 1)
-    public void loginApp() {
-        test = extent.createTest("Login to Dawak App");
-        Pages.AndroidAppLogin().handleSplashScreens();
-        Pages.AndroidAppLogin().loginToDawakApp();
-    }
-
-    @Test(priority = 2)
-    public void navigateToPatientPage() {
-        test = extent.createTest("Navigation to Add Family Form");
+    public void navigateToPatientPage() throws InterruptedException {
+        test.log(Status.INFO,"Navigation to Add Family Form");
+        Pages.MobileCommon().launchApp();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void addPatientToDawakApp() {
-        test = extent.createTest("Adding A New Patient");
+        test.log(Status.INFO,"Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
         Pages.DawakAppPatientModule().verifyOTP();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 3)
     public void verifyPatientDetails() throws FileNotFoundException {
-        test = extent.createTest("Verifying New Patient Details");
+        test.log(Status.INFO,"Verifying New Patient Details");
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void verifyPrescription() throws InterruptedException {
-        test = extent.createTest("Open Prescription and Verify ID");
+        test.log(Status.INFO,"Open Prescription and Verify ID");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
 
-    @Test(priority = 6)
+    @Test(priority = 5)
     public void sendPrescriptionForDelivery() throws InterruptedException {
-        test = extent.createTest("Deliver Medicine Functionality");
+        test.log(Status.INFO,"Deliver Medicine Functionality");
         Pages.DawakAppPrescriptionPage().deliverMedicine();
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public void webCentralPharma() {
-        test = extent.createTest("Sending For Insurance Approval from CP Portal through API");
+        test.log(Status.INFO,"Sending For Insurance Approval from CP Portal through API");
         WebLoginApiCall.makeWebLoginApiCall("LoginCP");
         WebCreateOtpApiCall.createOtpApiCall("CPCreateOTP");
         cpAccessToken = WebPutOTPApiCall.OTPApiCall("CPPutOTP");
@@ -77,9 +73,9 @@ public class TestRefillCancelOrderAfterInsuranceApproval extends BaseClass {
         ConfirmInsuranceApiCall.getConfirmInsuranceApiCall(cpAccessToken);
     }
 
-    @Test(priority = 8)
+    @Test(priority = 7)
     public void cancelPrescription() throws InterruptedException {
-        test = extent.createTest("Cancel the prescription");
+        test.log(Status.INFO,"Cancel the prescription");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().cancelOrder();
         Pages.DawakAppPrescriptionPage().setCancelPrescriptionReason();
@@ -87,7 +83,7 @@ public class TestRefillCancelOrderAfterInsuranceApproval extends BaseClass {
 
     @Test(priority = 9)
     public void verifyPrescriptionCancelled() throws InterruptedException {
-        test = extent.createTest("Verify that the prescription is cancelled");
+        test.log(Status.INFO,"Verify that the prescription is cancelled");
         Pages.DawakAppLandingPage().openCancelPrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
 
@@ -95,9 +91,14 @@ public class TestRefillCancelOrderAfterInsuranceApproval extends BaseClass {
 
     @Test(priority = 10)
     public void removePatientFromApp() {
-        test = extent.createTest("Deleting the Newly Added Patient");
+        test.log(Status.INFO,"Deleting the Newly Added Patient");
         Pages.MobileCommon().navigateBack();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
+        Pages.MobileCommon().backToDashboardArrowButton();
+    }
+    @Test(priority = 11)
+    public void closeDawakApp(){
+        Pages.MobileCommon().closeApp();
     }
 }

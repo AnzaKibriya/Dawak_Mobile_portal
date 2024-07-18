@@ -1,0 +1,24 @@
+<suite name="Dawak">
+
+    <test name="Dawak Android App Test Cash On Delivery Medicine">
+        <classes>
+            <class name="TestCashOnDeliveryMedicine"/>
+        </classes>
+    </test>
+
+    <test name="Dawak Android App Test New Pre Call To Pharmacist Functionality">
+        <classes>
+            <class name="TestNewPreCallToPharmacistFunctionality"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Refill Call To Phar Functionality">
+        <classes>
+            <class name="TestRefillCallToPharFunctionality"/>
+        </classes>
+    </test>
+    <test name="Dawak Android App Test Refill Cancel Order After Insurance Approval">
+        <classes>
+            <class name="TestRefillCancelOrderAfterInsuranceApproval"/>
+        </classes>
+    </test>
+</suite>

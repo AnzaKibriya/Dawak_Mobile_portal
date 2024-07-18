@@ -17,7 +17,6 @@ public class GetCallCenterTaskApiCall {
     public static int taskId;
     public static String encounterID;
     static String apiurl = BaseClass.propertyFile("config", "url") + "/dawak-portal/api/pharmacist/get-tasks";
-    ;
 
     public static int getTaskId() {
         return taskId;

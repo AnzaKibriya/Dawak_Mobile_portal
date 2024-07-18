@@ -1,6 +1,7 @@
 import API_Calls.*;
 import Helper.BaseClass;
 import Pages.Pages;
+import com.aventstack.extentreports.Status;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -14,56 +15,56 @@ String mobileUserAccessToken;
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
+        test.log(Status.INFO, "We are working on "+ prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
         NewPatientApiCall.makeCreatePatientApiCall(accessToken, prescriptionOrderID);
     }
 
     @Test(priority = 1)
-    public void loginApp() {
-        test = extent.createTest("Login to Dawak App");
-        Pages.AndroidAppLogin().handleSplashScreens();
-        Pages.AndroidAppLogin().loginToDawakApp();
-    }
-
-    @Test(priority = 2)
-    public void navigateToPatientPage() {
-        test = extent.createTest("Navigation to Add Family Form");
+    public void navigateToPatientPage() throws InterruptedException {
+        test.log(Status.INFO,"Navigation to Add Family Form");
+        Pages.MobileCommon().launchApp();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
 
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void addPatientToDawakApp() {
-        test = extent.createTest("Adding A New Patient");
+        test.log(Status.INFO,"Adding A New Patient");
         Pages.DawakAppPatientModule().addNewPatient();
         Pages.DawakAppPatientModule().verifyOTP();
     }
-    @Test(priority = 4)
+    @Test(priority = 3)
     public void verifyPatientDetails() throws FileNotFoundException {
-        test = extent.createTest("Verifying New Patient Details");
+        test.log(Status.INFO,"Verifying New Patient Details");
         Pages.DawakAppPatientModule().verifyPatientDetailsAndProceed();
         Pages.DawakAppPatientModule().navigateBackToDashboard();
     }
-    @Test(priority = 5)
+    @Test(priority = 4)
     public void verifyPrescription() throws InterruptedException {
-        test = extent.createTest("Open Prescription and Verify ID");
+        test.log(Status.INFO,"Open Prescription and Verify ID");
         Pages.DawakAppLandingPage().openActivePrescription();
         Pages.DawakAppPrescriptionPage().verifyPrescriptionID();
     }
 
-    @Test(priority = 6)
-    public void talktopharmacist() throws FileNotFoundException {
-        test = extent.createTest("Click on talk to pharmacist and verify");
+    @Test(priority = 5)
+    public void talkToPharmacist(){
+        test.log(Status.INFO,"Click on talk to pharmacist and verify");
         Pages.DawakAppLandingPage().talkToPharmacist();
     }
+//    @Test(priority = 6)
+//    public void removePatientFromApp() {
+//        test.log(Status.INFO,"Deleting the Newly Added Patient");
+//        mobileUserAccessToken = MobileUserLoginApiCall.makeMobileLoginApiCall("LoginMobile");
+//        GetPatientApiCall.getPatientApiCall(mobileUserAccessToken);
+//        int i =GetPatientApiCall.getPatientID();
+//        System.out.println("Patient id is"+i);
+//        DeletePatientApiCall.deletePatientApiCall(mobileUserAccessToken);
+//
+//    }
     @Test(priority = 7)
-    public void removePatientFromApp() {
-        test = extent.createTest("Deleting the Newly Added Patient");
-        mobileUserAccessToken = MobileUserLoginApiCall.makeMobileLoginApiCall("LoginMobile");
-        GetPatientApiCall.getPatientApiCall(mobileUserAccessToken);
-        int i =GetPatientApiCall.getPatientID();
-        System.out.println("Patient id is"+i);
-        DeletePatientApiCall.deletePatientApiCall(mobileUserAccessToken);
+    public void closeDawakApp(){
+        Pages.MobileCommon().closeApp();
     }
 }

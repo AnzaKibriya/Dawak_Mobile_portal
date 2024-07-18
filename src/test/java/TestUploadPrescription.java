@@ -18,12 +18,14 @@ public class TestUploadPrescription extends BaseClass {
         accessToken = LoginApiCall.makeLoginApiCall();
         prescriptionOrderID = generateRandomNumericString();
         System.out.println(prescriptionOrderID);
+        test.log(Status.INFO, "We are working on "+ prescriptionOrderID);
 //        PrescriptionApiCall.makePrescriptionApiCall(accessToken, prescriptionOrderID);
         NewPatientApiCall.makeCreatePatientApiCall(accessToken, prescriptionOrderID);
     }
     @Test(priority = 1)
     public void navigateToPatientPage() throws InterruptedException {
         test.log(Status.INFO, "Navigation to Add Family Form");
+        Pages.MobileCommon().launchApp();
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().clickOnAddFamilyBtn();
     }
@@ -96,5 +98,9 @@ public class TestUploadPrescription extends BaseClass {
         test.log(Status.INFO, "Deleting the Newly Added Patient");
         Pages.DawakAppLandingPage().navigateToPatientPage();
         Pages.DawakAppPatientModule().deletePatient();
+    }
+    @Test(priority = 9)
+    public void closeDawakApp(){
+        Pages.MobileCommon().closeApp();
     }
 }
