@@ -1,0 +1,120 @@
+{
+    "patient": {
+        "firstName": "Refill User",
+        "middleName": "New",
+        "lastName": "Patient",
+        "dob": "24/08/2010",
+        "patGender": "Male",
+        "phoneNumber": "",
+        "mrn": "",
+        "cmrn": "",
+        "eid": "",
+        "passportNumber": "4564564",
+        "mrnAssigningAuthority": {
+            "code": "AA",
+            "value": "Assigning Authority Value"
+        },
+        "latestWeightUnit": {
+            "code": "KG",
+            "value": "Kilograms"
+        },
+        "maritalStatus": {
+            "code": "MS",
+            "value": "Married"
+        },
+        "race": {
+            "code": "R1",
+            "value": "Race Value"
+        },
+        "language": {
+            "code": "EN",
+            "value": "English"
+        },
+        "nationality": {
+            "code": "US",
+            "value": "United States"
+        },
+        "address": {
+            "addressText": "123 Main Street",
+            "addressCity": "Anytown",
+            "area": {
+                "code": "AR1",
+                "value": "Area Value"
+            },
+            "state": {
+                "code": "ST1",
+                "value": "State Value"
+            },
+            "country": {
+                "code": "US",
+                "value": "United States"
+            }
+        }
+    },
+    "order": {
+        "orderType": "EXCEL_REFILL",
+        "workStation": "SK DWK01",
+        "pharmacyEncounterId": "2332423",
+        "physicianEncounterId": "32432432",
+        "parentFin": "64546464",
+        "physicianOrderDate": "",
+        "orderVisitDate": "",
+        "planName": "Plan XYZ",
+        "encounterType": {
+            "code": "ET1",
+            "value": "Encounter Type Value"
+        },
+        "orderLocation": {
+            "code": "40878243",
+            "value": "AA Behavioural Science"
+        },
+        "physician": {
+            "prescriber": "Dr. Smith",
+            "licenseNo": "License123"
+        },
+        "pharmacist": {
+            "username": "PharmUser",
+            "fullName": "PharmacistName"
+        },
+        "medications": [
+            {
+                "physicianOrderId": "23423423",
+                "dispensedOrderId": "234234234",
+                "nextRefillDate": "",
+                "lastDispDate": "",
+                "dohCode": "DOH456",
+                "ndcCode": "99991-0098-32",
+                "drugDescription": "Montelukast chewable 5mg Tablet",
+                "brandName": "Adult Low Strength Chewable Aspirin (G)",
+                "manfName": "Geri-Care Pharmaceuticals, U.S.AE",
+                "legalStatus": "General",
+                "drugForm": "Chew Tab",
+                "phxNbr": "Anthony777",
+                "orderDetailSimple": "500 mg, PO, BIDCC, for 90 day(s), 1 Refill(s)",
+                "orderDetailDtl": "500 mg, PO, BIDCC, Refills: 1, ,Maintenance, 459,816,147, 022-144-571",
+                "insurance": {
+                    "status": "APPROVED",
+                    "statusReason": "Testing_30032024_NEW",
+                    "copayAmount": "50.00",
+                    "selfPayAmount": "00.00"
+                },
+                "quantity": {
+                    "currentQuantity": 10,
+                    "remainingQuantity": 5,
+                    "totalQuantity": 15,
+                    "remainingCycles": 2,
+                    "rxaDaysSupply": 30,
+                    "uom": "ea"
+                },
+                "orderDiagnosis": {
+                    "code": "E25.0",
+                    "value": "Congenital adrenogenital disorders associated with enzyme deficiency"
+                },
+                "drugAdministrationRoute": {
+                    "code": "318185",
+                    "value": "PO"
+                }
+            }
+        ]
+    }
+}

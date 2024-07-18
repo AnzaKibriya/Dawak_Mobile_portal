@@ -1,0 +1,76 @@
+{
+    "patient": {
+        "firstName": "Automation",
+        "middleName": "QA",
+        "lastName": "Patient",
+        "dob": "12/12/1997",
+        "patGender": "Female",
+        "phoneNumber": "971536003356",
+        "mrn": "36003356",
+        "cmrn": "36003356",
+        "eid": "784396852844580",
+        "passportNumber": "241933",
+        "mrnAssigningAuthority": {
+            "code": "1",
+            "value": "Medical Authority"
+        },
+        "maritalStatus": {
+            "code": "2",
+            "value": "Married"
+        },
+        "race": {
+            "code": "3",
+            "value": "Asian"
+        },
+        "language": {
+            "code": "4",
+            "value": "English"
+        },
+        "nationality": {
+            "code": "5",
+            "value": "Pakistan"
+        },
+        "address": {
+            "addressText": "123 Main St",
+            "addressCity": "Cityville",
+            "area": {
+                "code": "6",
+                "value": "Downtown"
+            },
+            "state": {
+                "code": "7",
+                "value": "California"
+            },
+            "country": {
+                "code": "8",
+                "value": "United States"
+            }
+        }
+    },
+    "order": {
+        "parentFin": "140220253",
+        "physicianEncounterId": "",
+        "physicianOrderDate": "",
+        "orderVisitDate": "",
+        "orderLocation": {
+            "code": "MF5598",
+            "value": "SEHA_Dawak"
+        },
+        "physician": {
+            "prescriber": "Dr. Anne",
+            "licenseNo": "L12345"
+        },
+        "medications": [
+            {
+                "physicianOrderId": "1402202612",
+                "ndcCode": "99991-0098-32",
+                "drugDescription": "Montelukast chewable 5mg Tablet"
+            },
+            {
+                "physicianOrderId": "1402202713",
+                "ndcCode": "10003-0000-30",
+                "drugDescription": "metFormin 500mg Tablet"
+            }
+        ]
+    }
+}
